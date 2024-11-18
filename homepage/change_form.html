@@ -1,0 +1,42 @@
+{% extends "admin/change_form.html" %}
+
+{% block extrahead %}
+{{ block.super }}
+<style>
+    #image-preview {
+        max-width: 300px;
+        max-height: 300px;
+        margin-top: 10px;
+    }
+</style>
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        const imageInput = document.getElementById("id_Image");
+        const previewImage = document.getElementById("image-preview");
+
+        // Function to show the image preview
+        function previewImageFunction() {
+            const file = imageInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewImage.src = "";
+                previewImage.style.display = "none";
+            }
+        }
+
+        // Trigger the preview function when an image is selected
+        imageInput.addEventListener("change", previewImageFunction);
+
+        // Call the preview function if an image is already selected (for edit form)
+        if (imageInput.files.length > 0) {
+            previewImageFunction();
+        }
+    });
+</script>
+{% endblock %}
