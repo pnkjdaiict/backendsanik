@@ -89,7 +89,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopgg2',
         'NAME': 'royaldefenceAcademy',
         'USER': 'admin',
-        'PASSWROD':'admin#123',
+        'PASSWORD':'admin#123',
         'HOST':'localhost',
         'PORT':'5432'
         
