@@ -86,8 +86,13 @@ WSGI_APPLICATION = 'sanikbackend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopgg2',
+        'NAME': 'royaldefenceAcademy',
+        'USER': 'admin',
+        'PASSWROD':'admin#123',
+        'HOST':'localhost',
+        'PORT':''
+        
     }
 }
 
