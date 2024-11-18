@@ -86,11 +86,11 @@ WSGI_APPLICATION = 'sanikbackend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'RDA',
-        'USER': 'admin',
-        'PASSWORD':'ADMIN#123',
-        'HOST':'13.50.91.174',
+        'ENGINE': 'PostgreSQL',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD':'admin#123',
+        'HOST':'database-1.c1k8o620g4bi.eu-north-1.rds.amazonaws.com',
         'PORT':''
         
     }
