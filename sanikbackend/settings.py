@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'sanikbackend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopgg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'royaldefenceAcademy',
         'USER': 'admin',
         'PASSWROD':'admin#123',
