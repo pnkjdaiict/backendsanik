@@ -86,7 +86,7 @@ WSGI_APPLICATION = 'sanikbackend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'PostgreSQL',
+        'ENGINE': 'postgresql',
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD':'admin#123',
