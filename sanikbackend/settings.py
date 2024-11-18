@@ -87,10 +87,10 @@ WSGI_APPLICATION = 'sanikbackend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'rda',
+        'NAME': 'RDA',
         'USER': 'admin',
-        'PASSWORD':'admin#123',
-        'HOST':'localhost',
+        'PASSWORD':'ADMIN#123',
+        'HOST':['localhost','127.0.0.1'],
         'PORT':''
         
     }
@@ -138,7 +138,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',  # Replace with your actual frontend domain
+    'http://localhost:3000','13.50.91.174'  # Replace with your actual frontend domain
 ]
 CORS_ALLOW_METHODS = [
     'GET',
