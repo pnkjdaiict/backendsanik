@@ -90,7 +90,7 @@ DATABASES = {
         'NAME': 'RDA',
         'USER': 'admin',
         'PASSWORD':'ADMIN#123',
-        'HOST':['localhost','127.0.0.1'],
+        'HOST':['localhost','http://13.50.91.174'],
         'PORT':''
         
     }
