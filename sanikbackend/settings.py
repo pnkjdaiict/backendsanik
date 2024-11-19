@@ -25,7 +25,9 @@ SECRET_KEY = 'django-insecure-jy18ky$u$n+z6wj)_zt8+__^6p5j(t$@5yj#xj45j%yzvrjb!)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost' ]
+# ALLOWED_HOSTS = ['localhost' ]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '13.50.91.174' ,'0.0.0.0','13.61.64.189']
+
 
 
 # Application definition
@@ -84,15 +86,15 @@ WSGI_APPLICATION = 'sanikbackend.wsgi.application'
  
 DATABASES = {
     'default': {
-        'ENGINE': 'postgresql',
-        'NAME': 'postgres',
-        'USER': 'admin',
-        'PASSWORD':'admin#123',
-        'HOST':'database-1.c1k8o620g4bi.eu-north-1.rds.amazonaws.com',
-        'PORT':'5432'
-        
+        'ENGINE': 'django.db.backends.postgresql',  # Corrected engine path
+        'NAME': 'database-1',                         # Database name
+        'USER': 'postgresql',                            # Username
+        'PASSWORD': 'Admin#123',                    # Password
+        'HOST': 'database-1.c1k8o620g4bi.eu-north-1.rds.amazonaws.com',  # RDS endpoint
+        'PORT': '5432',                             # PostgreSQL default port
     }
 }
+
 
 
 # Password validation
@@ -136,7 +138,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000','http://13.50.91.174'  # Replace with your actual frontend domain
+    'http://localhost:3000','http://13.50.91.174' ,  # Replace with your actual frontend domain
 ]
 CORS_ALLOW_METHODS = [
     'GET',
