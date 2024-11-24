@@ -13,6 +13,8 @@ django-cors-headers = "*"
 django-storages = "*"
 boto3 = "*"
 psycopg2-binary = "*"
+python-dotenv = "*"
+
 [dev-packages]
 
 [requires]
