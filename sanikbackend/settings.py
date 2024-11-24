@@ -166,10 +166,10 @@ CORS_ALLOW_HEADERS = [
 
 #******************************AWS***********************************
 
-# AWS_ACCESS_KEY_ID = 'AKIAUMYCIT53LF2XR4F4'
-# AWS_SECRET_ACCESS_KEY ='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'
-# AWS_STORAGE_BUCKET_NAME = 'rdabucket'
-# AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_ACCESS_KEY_ID = 'AKIAUMYCIT53LF2XR4F4'
+AWS_SECRET_ACCESS_KEY ='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'
+AWS_STORAGE_BUCKET_NAME = 'rdabucket'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
@@ -182,4 +182,4 @@ STATICFILES_DIRS = [
 STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'sanikbackend.media_storages.MediaStorage'
-# ENCRYPT_KEY = b'2klRCmGP5edMHJTMwZA4s6TklhmUfLEytm9kYgmt5JA='
+ENCRYPT_KEY = b'2klRCmGP5edMHJTMwZA4s6TklhmUfLEytm9kYgmt5JA='
