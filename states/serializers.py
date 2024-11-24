@@ -36,3 +36,8 @@ class CitiesFullSerializer(serializers.ModelSerializer):
         model = Cities
         fields = '__all__'
 
+
+class LocalitiesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Localities
+        fields = '__all__'

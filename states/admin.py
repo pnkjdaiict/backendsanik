@@ -4,4 +4,4 @@ from django.utils.html import format_html
 # Register your models here.
 admin.site.register(State)
 admin.site.register(Cities)
-
+admin.site.register(Localities)

@@ -1,19 +1,30 @@
 from rest_framework import serializers
-from .models import Course, SubCourse
+from .models import *
 from states.models import Cities
 
 # Serializer for SubCourse Model
+class SubCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubCategory
+        fields = ['id', 'title', 'short_description', 'description', 'image', 'image_alt', 
+                  'price', 'meta_keyword', 'contact_number', 'facebook_link', 'instagram_link', 
+                  'youtube_link', 'meta_title', 'meta_description']
+
 class SubCourseSerializer(serializers.ModelSerializer):
+    subcategories = SubCategorySerializer(many=True, read_only=True)  # Nested serializer for subcategories
+
     class Meta:
         model = SubCourse
         fields = [
             'id',
             'title',
+            'slug_field',
             'short_description',
             'description',
             'image',
             'image_alt',
             'course_code',
+            'subcategories',
             'price',
             'meta_keyword',
             'contact_number',
@@ -36,13 +47,15 @@ class CourseSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'short_description',
+            'slug_field',
             'description',
-            'image',
-            'image_alt',
-            'states',
+            'image', 
+            'image_alt', 
+            'states', 
             'cities',
-            'course_code',
-            'SubCourses',  # Nested serializer
+            'localities',   
+            'course_code', 
+            'SubCourses',
             'meta_keyword',
             'contact_number',
             'youtube_link',
@@ -52,10 +65,17 @@ class CourseSerializer(serializers.ModelSerializer):
             'meta_description',
         ]
 
+class SubCategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SubCategory
+        fields = ['id', 'title' ,'short_description', 'description', 'image', 'image_alt', 
+                  'price' , 'meta_keyword', 'contact_number', 'facebook_link', 'instagram_link', 
+                  'youtube_link', 'meta_title', 'meta_description']
+
 class CityWithCoursesSerializer(serializers.ModelSerializer):
     # Include the related courses for each city
     courses = CourseSerializer(many=True, read_only=True)
 
     class Meta:
         model = Cities
-        fields = ['id', 'title', 'courses']  # Adjust fields based on your Cities model
+        fields = ['id', 'title', 'courses']   

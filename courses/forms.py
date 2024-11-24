@@ -13,8 +13,7 @@ class CourseForm(forms.ModelForm):
     cities = forms.ModelMultipleChoiceField(
         queryset=Cities.objects.all(),
         widget=forms.CheckboxSelectMultiple
-    )
-   
+    )  
 
     class Meta:
         model = Course

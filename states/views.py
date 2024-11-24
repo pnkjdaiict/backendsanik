@@ -11,4 +11,7 @@ class StateLimitedAPIView(ModelViewSet):
 class StateFullAPIView(ModelViewSet):
     queryset = State.objects.all()
     serializer_class = StateFullSerializer
-     
+
+class LocalitiesAPIView(ModelViewSet):
+    queryset = Localities.objects.all()
+    serializer_class = LocalitiesSerializer 

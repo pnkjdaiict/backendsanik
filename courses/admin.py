@@ -7,14 +7,17 @@ from .forms import CourseForm
 class CoursesAdmin(admin.ModelAdmin):
     form = CourseForm
     fields = (
-          'title', 'short_description', 'description', 'image','image_preview' , 'image_alt', 'course_code', 'SubCourses', 'states' ,'cities' ,'meta_keyword',
+          'title','short_description','slug_field' ,'description', 'image','image_preview' , 'image_alt', 'course_code', 'SubCourses', 'states' ,'cities', 'localities' ,'meta_keyword' ,  'meta_title' , 'meta_description',
             'contact_number',
             'facebook_link',
             'instagram_link',
+
             'youtube_link', )
-    list_display = ('title', 'image_preview', 'short_description','course_code',  'contact_number')  # Add other fields as needed
-    search_fields = ('title', 'course_code')    
-    readonly_fields = ('image_preview',)
+    # prepopulated_fields = {'slug': ('title',)} 
+    list_display = ('title', 'slug_field','image_preview', 'short_description','course_code',  'contact_number')  # Add other fields as needed
+    search_fields = ('title', 'course_code',)    
+    readonly_fields = ('image_preview','slug_field')  # Make the slug field readonly (optional)
+    
     
     def image_preview(self, obj):
         if obj.image:
@@ -24,11 +27,11 @@ class CoursesAdmin(admin.ModelAdmin):
 
 class SubCoursesAdmin(admin.ModelAdmin):
     fields = (
-        'title', 'short_description', 'description', 'image', 'image_alt', 'course_code', 'price',  'meta_keyword',
+        'title', 'short_description', 'description', 'image', 'image_alt', 'course_code', 'price',  'meta_keyword',  'meta_title' , 'meta_description',
             'contact_number',
-            'facebook_link',
+            'facebook_link' ,
             'instagram_link',
-            'youtube_link'
+            'youtube_link'  ,
     )
     list_display = ('title','image_preview', 'short_description' ,'course_code' ,'contact_number' )
     search_fields = ('title', 'course_code')    
@@ -44,3 +47,4 @@ class SubCoursesAdmin(admin.ModelAdmin):
  
 admin.site.register(Course ,CoursesAdmin)
 admin.site.register(SubCourse ,SubCoursesAdmin)
+admin.site.register(SubCategory)

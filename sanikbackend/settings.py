@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-jy18ky$u$n+z6wj)_zt8+__^6p5j(t$@5yj#xj45j%yzvrjb!)
 DEBUG = True
 
 # ALLOWED_HOSTS = ['localhost' ]
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '13.50.91.174' ,'0.0.0.0','13.61.64.189']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '13.50.91.174' ,'0.0.0.0','13.61.64.189','*']
 
 
 
@@ -39,9 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework' ,
+    'rest_framework',
     'django_filters',
     'corsheaders',
+    'storages',
     'ckeditor',
     'homepage' ,
     'states' , 
@@ -82,19 +83,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sanikbackend.wsgi.application'
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
  
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',  # Corrected engine path
-        'NAME': 'database-1',                         # Database name
-        'USER': 'postgresql',                            # Username
-        'PASSWORD': 'Admin#123',                    # Password
-        'HOST': 'database-1.c1k8o620g4bi.eu-north-1.rds.amazonaws.com',  # RDS endpoint
+        'NAME': 'rdadb',                         # Database name
+        'USER': 'rdadb',                            # Username
+        'PASSWORD': 'admin#12345',                    # Password
+        'HOST': 'rdadb.c9gi6kkea1nx.ap-south-1.rds.amazonaws.com',  # RDS endpoint
         'PORT': '5432',                             # PostgreSQL default port
     }
 }
-
+ 
 
 
 # Password validation
@@ -138,7 +145,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000','http://13.50.91.174' ,  # Replace with your actual frontend domain
+    'http://localhost:3000','http://13.50.91.174'# Replace with your actual frontend domain
 ]
 CORS_ALLOW_METHODS = [
     'GET',
@@ -154,3 +161,25 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     # Add more headers if needed
 ]
+
+
+
+#******************************AWS***********************************
+
+AWS_ACCESS_KEY_ID = 'AKIAUMYCIT53LF2XR4F4'
+AWS_SECRET_ACCESS_KEY ='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'
+AWS_STORAGE_BUCKET_NAME = 'rdabucket'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = 'public-read'
+AWS_LOCATION = 'static'
+STATICFILES_DIRS = [
+    'static',
+]
+STATIC_URL = 'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'sanikbackend.media_storages.MediaStorage'
+ENCRYPT_KEY = b'2klRCmGP5edMHJTMwZA4s6TklhmUfLEytm9kYgmt5JA='

@@ -1,0 +1,26 @@
+{% extends "admin/change_form.html" %}
+
+{% block extrahead %}
+  {{ block.super }}
+  <script type="text/javascript">
+      (function($){
+          $(document).ready(function(){
+              // When state is changed
+              $('#id_states').change(function(){
+                  var stateId = $(this).val();  // Get the selected state ID
+                  // Use AJAX to get the cities corresponding to the selected state
+                  $.ajax({
+                      url: '/admin/states/cities/',  // Replace with the URL to your city filter view
+                      data: { 'state_id': stateId },  // Pass the selected state ID
+                      success: function(data){
+                          $('#id_cities').empty();  // Clear existing cities
+                          data.forEach(function(cities){
+                              $('#id_cities').append('<option value="' + cities.id + '">' + cities.name + '</option>');
+                          });
+                      }
+                  });
+              });
+          });
+      })(django.jQuery);
+  </script>
+{% endblock %}
