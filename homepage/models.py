@@ -78,3 +78,6 @@ class EnquiryForm(models.Model):
    email = models.CharField(max_length=200)
    phone = models.CharField(max_length=50)
    message = models.CharField(max_length=250)
+   states = models.ManyToManyField(State, related_name='EnquiryForm')
+   cities = models.ManyToManyField(Cities, related_name='EnquiryForm')
+  

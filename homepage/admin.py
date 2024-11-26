@@ -42,8 +42,8 @@ class HomepageImagesAdmin(admin.ModelAdmin):
 
 class EnquiryFormAdmin(admin.ModelAdmin):
     form = EnqForm
-    list_display = ('name', 'email' , 'phone' ,'message' )
-    search_fields =('name' , 'email' , 'phone' , )
+    list_display = ('name', 'email' , 'phone' ,'message', )
+    search_fields =('name' , 'email' , 'phone' ,  )
 
 
 admin.site.register(HomePageImages ,HomepageImagesAdmin) 

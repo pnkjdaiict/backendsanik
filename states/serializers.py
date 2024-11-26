@@ -10,7 +10,7 @@ class StateLimitedSerializer(serializers.ModelSerializer):
             'facebook_link',
             'instagram_link',
             'Image',
-            'image_alt'
+            'image_alt',
         ]
 
 class StateFullSerializer(serializers.ModelSerializer):
