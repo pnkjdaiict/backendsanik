@@ -55,7 +55,7 @@ class CourseSerializer(serializers.ModelSerializer):
             'cities',
             'localities',   
             'course_code', 
-            'SubCourses',
+            # 'SubCourses',
             'meta_keyword',
             'contact_number',
             'youtube_link',

@@ -1,19 +1,17 @@
 from django.contrib import admin
 from .models import *
-# Register your models here.
 from django.utils.html import format_html
 from .forms import CourseForm
   
 class CoursesAdmin(admin.ModelAdmin):
     form = CourseForm
     fields = (
-          'title','short_description','slug_field' ,'description', 'image','image_preview' , 'image_alt', 'course_code', 'SubCourses', 'states' ,'cities', 'localities' ,'meta_keyword' ,  'meta_title' , 'meta_description',
+          'title','short_description','slug_field' ,'description', 'image','image_preview' , 'image_alt', 'course_code',  'states' ,'cities', 'localities' ,'meta_keyword' ,  'meta_title' , 'meta_description',
             'contact_number',
             'facebook_link',
             'instagram_link',
 
             'youtube_link', )
-    # prepopulated_fields = {'slug': ('title',)} 
     list_display = ('title', 'slug_field','image_preview', 'short_description','course_code',  'contact_number')  # Add other fields as needed
     search_fields = ('title', 'course_code',)    
     readonly_fields = ('image_preview','slug_field')  # Make the slug field readonly (optional)

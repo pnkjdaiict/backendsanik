@@ -41,7 +41,7 @@ class Course(models.Model):
     cities = models.ManyToManyField(Cities, related_name='courses')
     localities = models.ManyToManyField(Localities , related_name='courses')
     course_code = models.CharField(max_length=100, unique=True, null=True, blank=True)
-    SubCourses = models.ManyToManyField(SubCourse, related_name='courses', blank=True)
+    # SubCourses = models.ManyToManyField(SubCourse, related_name='courses', blank=True)
     meta_keyword = models.TextField(null=True, blank=True )
     contact_number = models.CharField(max_length=100 , null=True,  blank=True)
     youtube_link=models.CharField(max_length=250 , null=True , blank=True)
