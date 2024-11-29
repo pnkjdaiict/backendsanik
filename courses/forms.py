@@ -6,6 +6,13 @@ class CourseForm(forms.ModelForm):
     #     queryset=SubCourse.objects.all(),
     #     widget=forms.CheckboxSelectMultiple
     #      )
+    short_description = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 4,  # Number of visible rows
+            'cols': 50  # Number of visible columns
+        }),
+    
+    )
     states = forms.ModelMultipleChoiceField(
         queryset=State.objects.all(),
         widget=forms.CheckboxSelectMultiple
@@ -17,6 +24,25 @@ class CourseForm(forms.ModelForm):
 
     class Meta:
         model = Course
+        fields = '__all__'
+
+class SubCourseForm(forms.ModelForm):
+    short_description = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 4,  # Number of visible rows
+            'cols': 50  # Number of visible columns
+        }),
+        
+    )
+    courses = forms.ModelMultipleChoiceField(
+        queryset=Course.objects.all(),
+        widget=forms.CheckboxSelectMultiple
+         )
+     
+    
+
+    class Meta:
+        model = SubCourse
         fields = '__all__'
 
 
