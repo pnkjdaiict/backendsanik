@@ -27,22 +27,27 @@ class CourseForm(forms.ModelForm):
         fields = '__all__'
 
 class SubCourseForm(forms.ModelForm):
+    courses = forms.ModelMultipleChoiceField(
+        queryset=Course.objects.all(),
+        widget=forms.CheckboxSelectMultiple
+         )
     short_description = forms.CharField(
         widget=forms.Textarea(attrs={
             'rows': 4,  # Number of visible rows
             'cols': 50  # Number of visible columns
         }),
-        
-    )
-    courses = forms.ModelMultipleChoiceField(
-        queryset=Course.objects.all(),
-        widget=forms.CheckboxSelectMultiple
-         )
-     
     
+    )
+    states = forms.ModelMultipleChoiceField(
+        queryset=State.objects.all(),
+        widget=forms.CheckboxSelectMultiple
+    )
+    cities = forms.ModelMultipleChoiceField(
+        queryset=Cities.objects.all(),
+        widget=forms.CheckboxSelectMultiple
+    )  
 
     class Meta:
         model = SubCourse
         fields = '__all__'
-
 

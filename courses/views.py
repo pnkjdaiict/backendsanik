@@ -12,8 +12,6 @@ from django_filters.rest_framework import DjangoFilterBackend
 # views.py
 from django.http import JsonResponse
 from .models import *
-from rest_framework.views import APIView
-from rest_framework.response import Response
 
 def get_cities(request):
     state_id = request.GET.get('state_id')
@@ -65,10 +63,6 @@ class CourseListAPIView(ModelViewSet):
             serializer.save(slug_field=slugify(serializer.validated_data['title']))
         else:
             serializer.save()
-    def get(self, request, *args, **kwargs):
-        courses = Course.objects.all()
-        serializer = CourseSerializer(courses, many=True)
-        return Response(serializer.data)
 # View to get all sub-courses for a given course
 class SubCourseListAPIView(ModelViewSet):
         
@@ -80,14 +74,14 @@ class SubCourseListAPIView(ModelViewSet):
     
         def perform_create(self, serializer):
        
-         if not serializer.validated_data.get('slug_field'):
+         if not serializer.validated_data.get('slug'):
             serializer.save(slug_field=slugify(serializer.validated_data['title']))
          else:
             serializer.save()
 
         def perform_update(self, serializer):
          
-         if not serializer.validated_data.get('slug_field'):
+         if not serializer.validated_data.get('slug'):
             serializer.save(slug_field=slugify(serializer.validated_data['title']))
          else:
             serializer.save()
