@@ -19,9 +19,9 @@ class SubCourseImages(admin.StackedInline):
 class CoursesAdmin(admin.ModelAdmin):
     form = CourseForm
     inlines = [ImageInline ]
-   
+    
     fields = (
-          'title','short_description','slug_field' ,'description', 'image', 'image_alt', 'course_code' ,  'states' ,'cities', 'localities' ,'meta_keyword' ,  'meta_title' , 'meta_description',
+          'title','short_description','slug_field' ,'description', 'image', 'image_alt', 'course_code'  , 'states' ,'cities', 'localities' ,'meta_keyword' ,  'meta_title' , 'meta_description',
             'contact_number',
             'facebook_link',
             'instagram_link',
@@ -54,7 +54,14 @@ class SubCoursesAdmin(admin.ModelAdmin):
         
         return  format_html('<img src="{}" id="image-preview"  style="width: 100px; height: auto;" />', obj.image.url)
     image_preview.short_description = 'Image Preview'
+
+class SubCategoryAdmin(admin.ModelAdmin):
+    form = SubCategoriesForm
+    
  
+#  SubCategoriesForm
+
 admin.site.register(Course ,CoursesAdmin)
 admin.site.register(SubCourse ,SubCoursesAdmin)
-admin.site.register(SubCategory)
+admin.site.register(SubCategory ,SubCategoryAdmin)
+

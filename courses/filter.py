@@ -17,4 +17,4 @@ class SubcourseFilter(django_filters.FilterSet):
 
     class Meta:
         model = SubCourse
-        fields = ['title', 'slug_field',  ]
+        fields = ['title', 'slug_field', 'courses' ]

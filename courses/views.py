@@ -43,8 +43,9 @@ class SubCategoryListView(ModelViewSet):
 
 
 class CourseListAPIView(ModelViewSet):
-   
-    queryset = Course.objects.all()
+    queryset = Course.objects.prefetch_related('coursesn').all()  # Prefetch related sub-courses
+ 
+    # queryset = Course.objects.all()
     serializer_class = CourseSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']  # Restrict allowed methods
     filter_backends = [DjangoFilterBackend]  # Enable filtering

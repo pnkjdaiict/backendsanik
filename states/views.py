@@ -7,6 +7,9 @@ from .serializers import *
 class StateLimitedAPIView(ModelViewSet):
     queryset = State.objects.all()
     serializer_class = StateLimitedSerializer
+class CitiesAPIView(ModelViewSet):
+    queryset = Cities.objects.all()
+    serializer_class = CitiesFullSerializer
 
 class StateFullAPIView(ModelViewSet):
     queryset = State.objects.all()
