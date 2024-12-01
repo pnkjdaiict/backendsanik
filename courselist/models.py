@@ -6,7 +6,6 @@ from ckeditor.fields import RichTextField
 # Defining the 'mainCourse' model
 class mainCourse(models.Model):
     title = models.CharField(max_length=255)
-    slugfield = models.CharField(unique=True, max_length=255)
     short_description = models.CharField(max_length=250)
     description = RichTextField(null=True, blank=True)
     meta_keyword = models.TextField(null=True, blank=True)

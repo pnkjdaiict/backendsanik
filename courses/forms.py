@@ -38,14 +38,14 @@ class SubCourseForm(forms.ModelForm):
         }),
     
     )
-    states = forms.ModelMultipleChoiceField(
-        queryset=State.objects.all(),
-        widget=forms.CheckboxSelectMultiple
-    )
-    cities = forms.ModelMultipleChoiceField(
-        queryset=Cities.objects.all(),
-        widget=forms.CheckboxSelectMultiple
-    )  
+    # states = forms.ModelMultipleChoiceField(
+    #     queryset=State.objects.all(),
+    #     widget=forms.CheckboxSelectMultiple
+    # )
+    # cities = forms.ModelMultipleChoiceField(
+    #     queryset=Cities.objects.all(),
+    #     widget=forms.CheckboxSelectMultiple
+    # )  
 
     class Meta:
         model = SubCourse

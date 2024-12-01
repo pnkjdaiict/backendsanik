@@ -12,7 +12,6 @@ class SubCategorySerializer(serializers.ModelSerializer):
 
 class SubCourseSerializer(serializers.ModelSerializer):
     subcategories = SubCategorySerializer(many=True, read_only=True)   # Nested serializer for subcategories
-
     class Meta:
         model = SubCourse
         fields = [
@@ -24,7 +23,7 @@ class SubCourseSerializer(serializers.ModelSerializer):
             'image',
             'image_alt',
             'course_code',
-            'courses'
+            'courses',  
             'subcategories',
             'price',
             'meta_keyword',
@@ -41,7 +40,8 @@ class SubCourseSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     # Use SubCourseSerializer to serialize related sub_courses
     # SubCourses = SubCourseSerializer(many=True, read_only=True)
-
+    sub_courses = SubCourseSerializer(many=True, read_only=True)
+    
     class Meta:
         model = Course
         fields = [
@@ -55,6 +55,7 @@ class CourseSerializer(serializers.ModelSerializer):
             'states', 
             'cities',
             'localities', 
+            'sub_courses',
               
             'course_code', 
             'meta_keyword',

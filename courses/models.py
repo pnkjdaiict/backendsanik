@@ -38,7 +38,7 @@ class SubCourse(models.Model):
     slug_field =models.SlugField(unique=True, blank=True, null=True ,  )
     short_description = models.CharField(max_length=250)
     description = RichTextField(max_length=500)
-    image = models.ImageField(upload_to='covers/', blank=True, null=True ,default='default_image.jpg')
+    image = models.ImageField(upload_to='covers/', blank=True, null=True )
     image_alt = models.CharField(max_length=250, null=True, blank=True)
     course_code = models.CharField(max_length=100, unique=True, null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
@@ -49,8 +49,8 @@ class SubCourse(models.Model):
     youtube_link = models.CharField(max_length=250 , null=True  ,blank=True)
     meta_title = models.CharField(max_length =250, null=True ,  blank=True)
     meta_description = models.CharField(max_length=250 , null=True , blank=True)
-    courses  = models.ManyToManyField(Course, related_name='coursesn', blank=True) 
-
+    courses  = models.ManyToManyField(Course, related_name='coursesn', blank=True)
+    
     def save(self, *args, **kwargs):
         if not self.slug_field:  # Generate slug only if it's not already set
             self.slug_field = slugify(self.title)
