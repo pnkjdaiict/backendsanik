@@ -16,11 +16,13 @@ class SEO(models.Model):
     og_image = models.ImageField(upload_to='covers/', blank=True, null=True)
     og_url = models.URLField(help_text="URL of the page for Open Graph.")
 
+
     # Twitter Card Meta Tags
     twitter_card = models.CharField(
         max_length=255, default="summary_large_image", help_text="Twitter card type."
     )
     
+
     # Created and Updated Timestamps for better management
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
