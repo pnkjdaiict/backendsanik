@@ -8,7 +8,7 @@ from ckeditor.fields import RichTextField
 class Course(models.Model):
     title = models.CharField(max_length=255)
     short_description = models.CharField(max_length=250)
-    slug_field = models.SlugField(unique=True, blank=True, null=True ,  )  # Slug field
+    slug_field = models.SlugField(unique=True, blank=True, null=True ,)  # Slug field
     description = RichTextField()
     image = models.ImageField(upload_to='covers/', blank=True, null=True)
     image_alt = models.CharField(max_length=250, null=True, blank=True)
