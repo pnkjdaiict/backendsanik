@@ -54,19 +54,22 @@ admin.site.register(EnquiryForm,EnquiryFormAdmin)
 class SEOAdmin(admin.ModelAdmin):
     list_display = (
         'title',
+         'homepagetitle',
         'description',
         'keywords',
+        'logo',
         'canonical_url',
         'og_title',
         'og_description',
         'og_image',
-        'image_preview',  # Display image preview in the list view
+        'image_preview',
+          'logo_preview',  # Display image preview in the list view
         'og_url',
         'twitter_card',
     )  # Fields to display in the list view
     
     search_fields = ('title', 'description')  # Enable search by these fields
-    readonly_fields = ('image_preview',)  # Make the image preview field read-only
+    readonly_fields = ('image_preview','logo_preview'  )  # Make the image preview field read-only
 
     def image_preview(self, obj):
         if obj.og_image:
@@ -75,6 +78,15 @@ class SEOAdmin(admin.ModelAdmin):
         return "No Image"  # Return a fallback text if no image is provided
 
     image_preview.short_description = 'Image Preview'  # Customize the column name
+    
+    def logo_preview(self, obj):
+        if obj.logo:
+            # Preview for logo
+            return format_html(
+                '<img src="{}" id="logo-preview" style="width: 100px; height: auto;" />',
+                obj.logo.url
+            )
+        return "No Logo"
 
 # Register the SEO model and the custom admin
 admin.site.register(SEO, SEOAdmin)

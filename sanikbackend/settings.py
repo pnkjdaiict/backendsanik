@@ -52,6 +52,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -61,7 +62,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     
-]
+    ]
 
 ROOT_URLCONF = 'sanikbackend.urls'
 
@@ -98,7 +99,7 @@ DATABASES = {
         'USER': 'rdadb',                            # Username
         'PASSWORD': 'admin#12345',                    # Password
         'HOST': 'rdadb.c9gi6kkea1nx.ap-south-1.rds.amazonaws.com',  # RDS endpoint
-        'PORT': '5432',                             # PostgreSQL default port
+        'PORT': '5432',                        # PostgreSQL default port
     }
 }
  

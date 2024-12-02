@@ -6,6 +6,8 @@ class SEOSerializer(serializers.ModelSerializer):
         model = SEO
         fields = [
     'title'  ,
+    'homepagetitle',
+    'logo',
     'description'  ,
     'keywords' , 
     'canonical_url'  ,

@@ -6,18 +6,16 @@ from django.db import models
 class SEO(models.Model):
    
     title = models.CharField(max_length=255, help_text="The title of the page for SEO.")
+    homepagetitle = models.CharField(max_length=255, help_text="The home Page Title of the page."  , blank=True, null=True)
+    logo = models.ImageField(upload_to='covers/', blank=True, null=True)
     description = models.TextField(help_text="The meta description of the page.")
     keywords = models.CharField(max_length=255, help_text="Comma-separated keywords for SEO.")
     canonical_url = models.URLField(help_text="Canonical URL to avoid duplicate content issues.")
-
-    # Open Graph Meta Tags (for social media sharing)
     og_title = models.CharField(max_length=255, help_text="Open Graph title.")
     og_description = models.TextField(help_text="Open Graph description.")
     og_image = models.ImageField(upload_to='covers/', blank=True, null=True)
     og_url = models.URLField(help_text="URL of the page for Open Graph.")
 
-
-    # Twitter Card Meta Tags
     twitter_card = models.CharField(
         max_length=255, default="summary_large_image", help_text="Twitter card type."
     )
