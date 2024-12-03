@@ -1,6 +1,29 @@
 from rest_framework import serializers
 from .models import *
 from states.models import Cities
+from rest_framework import serializers
+from .models import Image
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = [
+            'id', 
+            'course', 
+            'image', 
+            'image_alt', 
+            'meta_keyword', 
+            'contact_number', 
+            'youtube_link', 
+            'facebook_link', 
+            'instagram_link', 
+            'meta_title', 
+            'meta_description'
+        ]
+        extra_kwargs = {
+            'course': {'write_only': True},  # Optionally hide course in the response
+        }
+
 class StateSerializer(serializers.ModelSerializer):
     class Meta:
         model = State
@@ -12,6 +35,7 @@ class CitySerializer(serializers.ModelSerializer):
         fields = '__all__'  # Include all fields or specify specific fields
 
 # Serializer for SubCourse Model
+
 class SubCategorySerializer(serializers.ModelSerializer):
     
     class Meta:
@@ -56,7 +80,7 @@ class CourseSerializer(serializers.ModelSerializer):
 
     sub_courses = SubCourseSerializer(many=True, read_only=True)
     coursesn = SubCourseSerializer(many=True, read_only=True)  # Use the related_name defined in the Course model
-
+    images = ImageSerializer(many=True, read_only=True)
     class Meta:
         model = Course
         fields = [
