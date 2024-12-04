@@ -16,9 +16,13 @@ class SubCourseImages(admin.StackedInline):
     classes = ('collapse',)  # Optional: Makes it collapsible in admin panel
 
     extra = 1  # Number of empty image fields to display
+ 
 class CoursesAdmin(admin.ModelAdmin):
+    class Media:
+        js = ('js/slugify.js',) 
     form = CourseForm
     inlines = [ImageInline ]
+    prepopulated_fields = {'slug_field': ('title',)}
     
     fields = (
           'title','short_description','slug_field' ,'description', 'image', 'image_alt', 'course_code'  , 'states' ,'cities', 'localities' ,'meta_keyword' ,  'meta_title' , 'meta_description',
@@ -28,7 +32,7 @@ class CoursesAdmin(admin.ModelAdmin):
             'youtube_link',)
     list_display = ('title', 'slug_field','image_preview', 'short_description','course_code',  'contact_number' ,)  # Add other fields as needed
     search_fields = ('title', 'course_code',)    
-    readonly_fields = ('image_preview','slug_field')  # Make the slug field readonly (optional)
+    readonly_fields = ('image_preview',)  # Make the slug field readonly (optional)
     
     
     def image_preview(self, obj):
