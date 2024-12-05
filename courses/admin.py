@@ -19,7 +19,7 @@ class SubCourseImages(admin.StackedInline):
  
 class CoursesAdmin(admin.ModelAdmin):
     class Media:
-        js = ('js/slugify.js',) 
+      js = ('js/slugify.js',) 
     form = CourseForm
     inlines = [ImageInline ]
     prepopulated_fields = {'slug_field': ('title',)}
