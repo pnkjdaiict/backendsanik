@@ -4,8 +4,8 @@ from rest_framework.routers import DefaultRouter
 from .views import *
 
 router = DefaultRouter()
-router.register('blogs', BlogsViewSet)
-router.register('homePageBlogs', BlogHomepageViewSet ,basename='blog-homepage')
+router.register('newss', NewssViewSet)
+router.register('homePagenewss', NewsHomepageViewSet ,basename='News-homepage')
  
 
 

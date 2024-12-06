@@ -9,7 +9,10 @@ urlpatterns = [
     path('', include('homepage.urls')),  # Include the homepage app's URLs
     path('' , include('states.urls')), 
     path('' , include ('courses.urls')),
-    path('' , include('blogs.urls'))
+    path('' , include('blogs.urls')) ,
+    path('' , include('news.urls'))
+
+
 
 ] 
 if settings.DEBUG:

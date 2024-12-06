@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'homepage' ,
     'states' , 
     'courses',
-    'blogs' ,   
+    'blogs' , 
+    'news'  ,
     
 ]
 
