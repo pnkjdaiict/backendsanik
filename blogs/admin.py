@@ -4,7 +4,7 @@ from .models import *
 from django.utils.html import format_html
 class BlogAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'status', 'created_at', 'updated_at', 'image_preview')  # Customize the fields displayed
-    list_filter = ('status', 'created_at', 'updated_at')  # Add filters for easier navigation
+    list_filter = ('title' ,'status', 'created_at', 'updated_at')  # Add filters for easier navigation
     search_fields = ('title', 'author', 'short_description')  # Add search functionality
     readonly_fields = ('image_preview',)  # Make the image preview read-only
 
