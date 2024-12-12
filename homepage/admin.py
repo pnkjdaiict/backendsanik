@@ -22,13 +22,12 @@ admin.site.register(Banner, BannerAdmin)
 
 class TopScrollerAdmin(admin.ModelAdmin):
     list_display = ('title', 'image_preview','image_alt', 'description')  # Fields to display in the list view
-    search_fields = ('title', 'description')              # Enable search by these fields
+    search_fields = ('title', 'description')          
     readonly_fields = ('image_preview',)
     def image_preview(self, obj):
         if obj.Image:
             return format_html('<img src="{}" id="image-preview"/>', obj.Image.url)
     image_preview.short_description = 'Image Preview'
-
 admin.site.register(TopScroller ,TopScrollerAdmin) 
 
 class HomepageImagesAdmin(admin.ModelAdmin):
@@ -63,9 +62,12 @@ class SEOAdmin(admin.ModelAdmin):
         'og_description',
         'og_image',
         'image_preview',
-          'logo_preview',  # Display image preview in the list view
+        'logo_preview',  # Display image preview in the list view
         'og_url',
         'twitter_card',
+        'contact_number', 
+        'address' ,
+        'email'
     )  # Fields to display in the list view
     
     search_fields = ('title', 'description')  # Enable search by these fields

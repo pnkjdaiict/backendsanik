@@ -16,7 +16,10 @@ class SEOSerializer(serializers.ModelSerializer):
     'keywords',
     'og_image'  ,
     'og_url'  ,
-    'twitter_card'  
+    'twitter_card'   ,
+    'contact_number', 
+    'address' ,
+    'email'
         ]
     def validate_keywords(self, value):
         """Ensure meta_keyword is stored as a comma-separated string."""
@@ -102,5 +105,7 @@ class EnquieryFormSerializer(serializers.ModelSerializer):
             'name' ,
             'phone',
             'email',
-            'message',           
+            'message', 
+            'cities' ,
+            'states'   ,        
         ]

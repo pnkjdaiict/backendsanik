@@ -15,7 +15,9 @@ class SEO(models.Model):
     og_description = models.TextField(help_text="Open Graph description.")
     og_image = models.ImageField(upload_to='covers/', blank=True, null=True)
     og_url = models.URLField(help_text="URL of the page for Open Graph.")
-
+    address =  models.CharField(max_length=255, help_text="The home Page Title of the page."  , blank=True, null=True)
+    contact_number = models.CharField(max_length=255 , blank=True , null= True)
+    email = models.CharField(max_length=255 , blank=True , null= True)
     twitter_card = models.CharField(
         max_length=255, default="summary_large_image", help_text="Twitter card type."
     )
@@ -78,6 +80,6 @@ class EnquiryForm(models.Model):
    email = models.CharField(max_length=200)
    phone = models.CharField(max_length=50)
    message = models.CharField(max_length=250)
-   states = models.ManyToManyField(State, related_name='EnquiryForm')
-   cities = models.ManyToManyField(Cities, related_name='EnquiryForm')
+   states = models.CharField(max_length=200, blank=True)
+   cities = models.CharField(max_length=200, blank=True)
   

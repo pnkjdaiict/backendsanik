@@ -9,4 +9,4 @@ class NewsFilter(django_filters.FilterSet):
     class Meta:
         model = News
         fields = ['title', 'author', 'status', 'created_at']
-
+        
