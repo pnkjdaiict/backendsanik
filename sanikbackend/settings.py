@@ -44,10 +44,13 @@ INSTALLED_APPS = [
     'storages',
     'ckeditor',
     'homepage' ,
-    'states' , 
+    'states', 
     'courses',
-    'blogs' , 
-    'news'  ,
+    'blogsdata',  
+    'news',
+    'blogs',
+    'newsdata',  
+    
     
 ]
 

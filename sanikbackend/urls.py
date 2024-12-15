@@ -10,7 +10,9 @@ urlpatterns = [
     path('' , include('states.urls')), 
     path('' , include ('courses.urls')),
     path('' , include('blogs.urls')) ,
-    path('' , include('news.urls'))
+    # path('' , include('news.urls')) ,
+    path('' , include('blogsdata.urls')),
+    path('' , include('newsdata.urls'))
 
 
 

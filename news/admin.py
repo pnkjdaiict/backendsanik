@@ -19,4 +19,4 @@ class NewsAdmin(admin.ModelAdmin):
     image_preview.short_description = "Image Preview"  # Column name in the admin interface
 
 # Register News and Tag in admin
-admin.site.register(News, NewsAdmin)
+# admin.site.register(News, NewsAdmin)

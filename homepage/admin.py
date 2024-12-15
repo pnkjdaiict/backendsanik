@@ -53,7 +53,7 @@ admin.site.register(EnquiryForm,EnquiryFormAdmin)
 class SEOAdmin(admin.ModelAdmin):
     list_display = (
         'title',
-         'homepagetitle',
+        'homepagetitle',
         'description',
         'keywords',
         'logo',

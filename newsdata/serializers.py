@@ -1,9 +1,9 @@
 
 from rest_framework import serializers
 from .models import *
-class BlogSerializer(serializers.ModelSerializer):
+class newsDataSerializer(serializers.ModelSerializer):
     class Meta :
-        model = Blog
+        model = news
         fields = [
             'id',
             'title',
@@ -19,7 +19,7 @@ class BlogSerializer(serializers.ModelSerializer):
             'meta_description',
             'meta_keywords',
         ]
-class BlogHomepageSerializer(serializers.ModelSerializer):
+class newsHomepageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Blog
+        model = news
         fields = ['title', 'short_description', 'image', 'author',]
