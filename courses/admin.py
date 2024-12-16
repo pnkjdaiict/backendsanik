@@ -63,8 +63,27 @@ class SubCategoryAdmin(admin.ModelAdmin):
     form = SubCategoriesForm
     
  
-#  SubCategoriesForm
 
+class CourseSeoDataAdmin(admin.ModelAdmin):
+    list_display = ('meta_title', 'meta_description', 'twitter_card', 'og_image_preview')
+    list_filter = ('twitter_card',)
+    search_fields = ('meta_title', 'meta_description', 'meta_keywords', 'og_title', 'og_description')
+    readonly_fields = ('og_image_preview',)  # Make the preview field read-only
+    form =CourseSeoDataForm
+    def og_image_preview(self, obj):
+        """
+        Returns an HTML snippet for displaying the image preview in the admin.
+        """
+        if obj.og_image:
+            return format_html(
+                '<img src="{}" style="max-width: 150px; max-height: 150px;" alt="OG Image Preview"/>',
+                obj.og_image.url,
+            )
+        return "No Image"
+
+    og_image_preview.short_description = "OG Image Preview"
+
+admin.site.register(CourseSeoData, CourseSeoDataAdmin)
 admin.site.register(Course ,CoursesAdmin)
 admin.site.register(SubCourse ,SubCoursesAdmin)
 admin.site.register(SubCategory ,SubCategoryAdmin)

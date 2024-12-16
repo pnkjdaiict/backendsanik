@@ -2,10 +2,7 @@ from django import forms
 from .models import *
 
 class CourseForm(forms.ModelForm):
-    # SubCourses = forms.ModelMultipleChoiceField(
-    #     queryset=SubCourse.objects.all(),
-    #     widget=forms.CheckboxSelectMultiple
-    #      )
+   
     title = forms.CharField(
         widget=forms.Textarea(attrs={
             'rows': 4,  # Number of visible rows
@@ -177,3 +174,55 @@ class SubCourseForm(forms.ModelForm):
         model = SubCourse
         fields = '__all__'
 
+
+class CourseSeoDataForm(forms.ModelForm):
+    meta_title = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 4,  # Number of visible rows
+            'cols': 150  # Number of visible columns
+        }),
+        required=False
+    )
+
+    meta_description = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 4,
+            'cols': 150
+        }),
+        required=False
+    )
+
+    meta_keywords = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 4,
+            'cols': 150
+        }),
+        required=False
+    )
+
+    og_title = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 4,
+            'cols': 150
+        }),
+        required=False
+    )
+
+    og_description = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 4,
+            'cols': 150
+        }),
+        required=False
+    )
+
+    
+
+    twitter_card = forms.ChoiceField(
+        choices=[("summary", "Summary"), ("summary_large_image", "Summary Large Image")],
+        required=False
+    )
+
+    class Meta:
+        model = CourseSeoData
+        fields = '__all__'

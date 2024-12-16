@@ -29,7 +29,23 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
-
+class CourseSeoData(models.Model):
+    meta_title = models.CharField(max_length=250, null=True, blank=True)
+    meta_description = models.CharField(max_length=250, null=True, blank=True)
+    meta_keywords = models.TextField(null=True, blank=True)
+    og_title = models.CharField(max_length=250, null=True, blank=True)
+    og_description = models.CharField(max_length=250, null=True, blank=True)
+    og_image = models.ImageField(upload_to="og_images/", null=True, blank=True)
+    twitter_card = models.CharField(
+        max_length=50, 
+        choices=[("summary", "Summary"), ("summary_large_image", "Summary Large Image")],
+        default="summary",
+        null=True, 
+        blank=True
+    )
+    
+    def __str__(self):
+        return self.meta_title or "SEO Data"
 
 # SubCourses Model
 class SubCourse(models.Model):

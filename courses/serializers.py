@@ -70,8 +70,21 @@ class SubCourseSerializer(serializers.ModelSerializer):
             'meta_description',
         ]
 
-
+# Serializer for seo Course Model
+class CourseSeoDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CourseSeoData
+        fields = [
+            "meta_title",
+            "meta_description",
+            "meta_keywords",
+            "og_title",
+            "og_description",
+            "og_image",
+            "twitter_card",
+        ]
 # Serializer for Course Model
+
 class CourseSerializer(serializers.ModelSerializer):
     # Use SubCourseSerializer to serialize related sub_courses
     # SubCourses = SubCourseSerializer(many=True, read_only=True)
