@@ -64,10 +64,13 @@ class SEOAdmin(admin.ModelAdmin):
         'image_preview',
         'logo_preview',  # Display image preview in the list view
         'og_url',
+        'scripts' ,
         'twitter_card',
         'contact_number', 
         'address' ,
-        'email'
+        'email' ,
+        'location' ,
+        'whatsapp_number'
     )  # Fields to display in the list view
     
     search_fields = ('title', 'description')  # Enable search by these fields

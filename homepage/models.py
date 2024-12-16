@@ -17,7 +17,12 @@ class SEO(models.Model):
     og_url = models.URLField(help_text="URL of the page for Open Graph.")
     address =  models.CharField(max_length=255, help_text="The home Page Title of the page."  , blank=True, null=True)
     contact_number = models.CharField(max_length=255 , blank=True , null= True)
+    whatsapp_number = models.CharField(max_length=15, blank=True, null=True) 
+    location = models.CharField(max_length=500 , blank=True , null= True)
     email = models.CharField(max_length=255 , blank=True , null= True)
+    scripts = models.TextField(
+        blank=True, null=True, help_text="Custom scripts (e.g., tracking, analytics) to embed in the page."
+    )  # New field for custom scripts
     twitter_card = models.CharField(
         max_length=255, default="summary_large_image", help_text="Twitter card type."
     )
@@ -31,6 +36,8 @@ class SEO(models.Model):
         return self.title
     def get_keywords(self): 
         return self.keywords.split(',') if self.keywords else []
+
+
 class Banner(models.Model):
       Image = models.ImageField(upload_to='covers/', blank=True, null=True)
       description = models.CharField(max_length=250 , null=True , blank=True)

@@ -4,7 +4,6 @@ from states.models import *
 from django.utils.text import slugify
 from ckeditor.fields import RichTextField
 
-
 class Course(models.Model):
     title = models.CharField(max_length=255)
     short_description = models.CharField(max_length=250)
