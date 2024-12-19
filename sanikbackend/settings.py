@@ -144,7 +144,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000','http://13.50.91.174' , 'http://127.0.0.1:5500' , 'https://www.aisseecoaching.com' ,
-        'https://aisseecoaching.com' ,    
+        'https://aisseecoaching.com' , 'https://www.royaldefenceacademy.com'   
 ]
 CORS_ALLOW_METHODS = [
     'GET',
