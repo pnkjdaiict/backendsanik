@@ -5,7 +5,8 @@ from django.utils.text import slugify
 from ckeditor.fields import RichTextField
 
 class Course(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255 , help_text="enter title")
+    short_title = models.CharField(max_length=255  , blank=True, null=True ,)
     short_description = models.CharField(max_length=250)
     slug_field = models.SlugField(unique=True, blank=True, null=True ,)  # Slug field
     description = RichTextField()
@@ -106,6 +107,7 @@ class SubCourseImage(models.Model):
         return f"Image for {self.course.title}"
 
 class SubCategory(models.Model):
+
     title = models.CharField(max_length=255)
     short_description = models.CharField(max_length=250, blank=True, null=True)
     description = RichTextField(blank=True, null=True)
@@ -123,3 +125,17 @@ class SubCategory(models.Model):
     
     def __str__(self): 
         return self.title
+    
+class multiple_title(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='multiple_title')
+    title = models.TextField(null=True, blank=True )
+    
+    def __str__(self):
+          return self.title
+class multiple_descriptions(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='multiple_description')
+    title =  models.TextField(null=True, blank=True )
+    description = RichTextField()
+    
+    def __str__(self):
+          return self.title

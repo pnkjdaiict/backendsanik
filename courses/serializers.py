@@ -3,7 +3,23 @@ from .models import *
 from states.models import Cities
 from rest_framework import serializers
 from .models import Image
-
+from .serializers import *
+class multi_descriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = multiple_descriptions
+        fields = [
+            'id', 
+            'description',
+            'course', 
+        ]
+class multi_titleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = multiple_title
+        fields = [
+            'id', 
+            'title',
+            'course', 
+        ]
 class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Image
@@ -86,19 +102,18 @@ class CourseSeoDataSerializer(serializers.ModelSerializer):
 # Serializer for Course Model
 
 class CourseSerializer(serializers.ModelSerializer):
-    # Use SubCourseSerializer to serialize related sub_courses
-    # SubCourses = SubCourseSerializer(many=True, read_only=True)
     states = StateSerializer(many=True, read_only=True)
     cities = CitySerializer(many=True, read_only=True)
-
     sub_courses = SubCourseSerializer(many=True, read_only=True)
     coursesn = SubCourseSerializer(many=True, read_only=True)  # Use the related_name defined in the Course model
     images = ImageSerializer(many=True, read_only=True)
+    multiple_title = multi_titleSerializer(many=True, read_only=True)
     class Meta:
         model = Course
         fields = [
             'id',
             'title',
+            'short_title',
             'short_description',
             'slug_field',
             'description',
@@ -117,7 +132,8 @@ class CourseSerializer(serializers.ModelSerializer):
             'instagram_link',
             'meta_title',
             'meta_description',
-            'images'
+            'images' ,
+            'multiple_title'
         ]
 
 class SubCategorySerializer(serializers.ModelSerializer):
@@ -134,3 +150,6 @@ class CityWithCoursesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cities
         fields = ['id', 'title', 'courses']   
+
+
+        

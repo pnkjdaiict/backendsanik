@@ -2,10 +2,21 @@ from django.contrib import admin
 from .models import *
 from django.utils.html import format_html
 from .forms import *
+class DescriptionInline(admin.StackedInline):
+    model = multiple_descriptions
+ 
+    fields = (   'id', 'title','description')  
+    classes = ('collapse',)   
+    extra = 1  
+class TitleInline(admin.StackedInline):
+    model = multiple_title
+    form = multititleForm
+    fields = (   'id', 'title',)  
+    classes = ('collapse',)   
+    extra = 1  
 class ImageInline(admin.StackedInline):
     model = Image
     fields = ('image', 'image_alt', 'meta_keyword' , 'contact_number' , 'youtube_link' , 'facebook_link', 'instagram_link' , 'meta_title' , 'meta_description')  # Replace with your model's fields
-    
     classes = ('collapse',)  # Optional: Makes it collapsible in admin panel
 
     extra = 1  # Number of empty image fields to display
@@ -21,11 +32,11 @@ class CoursesAdmin(admin.ModelAdmin):
     class Media:
       js = ('js/slugify.js',) 
     form = CourseForm
-    inlines = [ImageInline ]
+    inlines = [ImageInline ,TitleInline,DescriptionInline ]
     prepopulated_fields = {'slug_field': ('title',)}
     
     fields = (
-          'title','short_description','slug_field' ,'description', 'image', 'image_alt', 'course_code'  , 'states' ,'cities', 'localities' ,'meta_keyword' ,  'meta_title' , 'meta_description',
+          'title', 'short_title','short_description','slug_field' ,'description', 'image', 'image_alt', 'course_code'  , 'states' ,'cities', 'localities' ,'meta_keyword' ,  'meta_title' , 'meta_description',
             'contact_number',
             'facebook_link',
             'instagram_link',
@@ -62,8 +73,6 @@ class SubCoursesAdmin(admin.ModelAdmin):
 class SubCategoryAdmin(admin.ModelAdmin):
     form = SubCategoriesForm
     
- 
-
 class CourseSeoDataAdmin(admin.ModelAdmin):
     list_display = ('meta_title', 'meta_description', 'twitter_card', 'og_image_preview')
     list_filter = ('twitter_card',)

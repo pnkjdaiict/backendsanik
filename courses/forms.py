@@ -1,5 +1,16 @@
 from django import forms
 from .models import *
+class multititleForm(forms.ModelForm):
+   
+    title = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 2,  # Number of visible rows
+            'cols': 150  # Number of visible columns
+        }),
+     )
+    class Meta:
+        model = multiple_title
+        fields = '__all__'
 
 class CourseForm(forms.ModelForm):
    
@@ -50,9 +61,7 @@ class CourseForm(forms.ModelForm):
             'rows': 4,  # Number of visible rows
             'cols': 150  # Number of visible columns
         }),
-     )
-    
-    
+     )     
     states = forms.ModelMultipleChoiceField(
         queryset=State.objects.all(),
         widget=forms.CheckboxSelectMultiple

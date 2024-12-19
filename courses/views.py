@@ -20,8 +20,6 @@ def get_cities(request):
         return JsonResponse(list(cities), safe=False)
     return JsonResponse([], safe=False)
 
-
-
 class CourseForm(forms.ModelForm):
     class Meta:
         model = Course
@@ -35,15 +33,12 @@ class CourseForm(forms.ModelForm):
         elif self.instance.pk:
             self.fields['cities'].queryset = self.instance.states.first().cities.all() if self.instance.states.exists() else Cities.objects.none()
 
-
 class SubCategoryListView(ModelViewSet):
         queryset = SubCategory.objects.all()
         serializer_class = SubCategorySerializer
         
         http_method_names = ['get', 'post', 'patch', 'delete']  # Allow GET, POST, PATCH, DELETE (optional)
         
-
-
 class CourseListAPIView(ModelViewSet):
     queryset = Course.objects.prefetch_related('coursesn').all()  # Prefetch related sub-courses
  
@@ -98,6 +93,7 @@ class CourseListView(ModelViewSet):
         serializer_class = SubCategorySerializer 
         http_method_names = ['get', 'post', 'patch', 'delete']  # Allow GET, POST, PATCH, DELETE (optional)
 class CourseSeoDataViewSet(ModelViewSet):
+
 
     queryset = CourseSeoData.objects.all()
     serializer_class = CourseSeoDataSerializer

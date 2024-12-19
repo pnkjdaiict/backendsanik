@@ -14,6 +14,7 @@ django-storages = "*"
 boto3 = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
+django-autocomplete-light = "*"
 
 [dev-packages]
 
