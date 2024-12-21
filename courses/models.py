@@ -30,6 +30,9 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+
+
+
 class CourseSeoData(models.Model):
     meta_title = models.CharField(max_length=250, null=True, blank=True)
     meta_description = models.CharField(max_length=250, null=True, blank=True)
