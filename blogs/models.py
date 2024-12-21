@@ -28,9 +28,9 @@ class Blog(models.Model):
         ('archived', 'Archived'),
     ], default='draft')
     image = models.ImageField(upload_to='blog_images/', null=True, blank=True)
-    meta_title = models.CharField(max_length=255, blank=True, null=True)
-    meta_description = models.CharField(max_length=500, blank=True, null=True)
-    meta_keywords = models.CharField(max_length=255, blank=True, null=True)
+    meta_title = models.CharField( blank=True, null=True)
+    meta_description = models.CharField( blank=True, null=True)
+    meta_keywords = models.CharField( blank=True, null=True)
     def save(self, *args, **kwargs):
         if not self.slug_field:  # Generate slug only if it's not already set
             self.slug_field = slugify(self.title)

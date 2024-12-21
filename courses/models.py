@@ -14,7 +14,7 @@ class Course(models.Model):
     image_alt = models.CharField(max_length=250, null=True, blank=True)
     states = models.ManyToManyField(State, related_name='courses')
     cities = models.ManyToManyField(Cities, related_name='courses')
-    localities = models.ManyToManyField(Localities , related_name='courses')
+    localities = models.ManyToManyField(Localities , related_name='localities')
     course_code = models.CharField(max_length=100, unique=True, null=True, blank=True)
     meta_keyword = models.TextField(null=True, blank=True )
     contact_number = models.CharField(max_length=100 , null=True,  blank=True)

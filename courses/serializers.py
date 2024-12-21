@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import *
-from states.models import Cities
+from states.models import *
 from rest_framework import serializers
 from .models import Image
 from .serializers import *
@@ -48,6 +48,10 @@ class StateSerializer(serializers.ModelSerializer):
 class CitySerializer(serializers.ModelSerializer):
     class Meta:
         model = Cities
+        fields = '__all__'  # Include all fields or specify specific fields
+class LocalitiesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Localities
         fields = '__all__'  # Include all fields or specify specific fields
 
 # Serializer for SubCourse Model
@@ -100,10 +104,24 @@ class CourseSeoDataSerializer(serializers.ModelSerializer):
             "twitter_card",
         ]
 # Serializer for Course Model
+class CourseSeoDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CourseSeoData
+        fields = [
+            "meta_title",
+            "meta_description",
+            "meta_keywords",
+            "og_title",
+            "og_description",
+            "og_image",
+            "twitter_card",
+        ]
+# Serializer for Course Model
 
 class CourseSerializer(serializers.ModelSerializer):
     states = StateSerializer(many=True, read_only=True)
     cities = CitySerializer(many=True, read_only=True)
+    localities = LocalitiesSerializer(many=True, read_only=True)
     sub_courses = SubCourseSerializer(many=True, read_only=True)
     coursesn = SubCourseSerializer(many=True, read_only=True)  # Use the related_name defined in the Course model
     images = ImageSerializer(many=True, read_only=True)
