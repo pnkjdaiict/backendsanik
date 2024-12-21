@@ -108,6 +108,8 @@ class CourseSerializer(serializers.ModelSerializer):
     coursesn = SubCourseSerializer(many=True, read_only=True)  # Use the related_name defined in the Course model
     images = ImageSerializer(many=True, read_only=True)
     multiple_title = multi_titleSerializer(many=True, read_only=True)
+    multiple_description  = multi_descriptionSerializer(many=True, read_only=True)
+
     class Meta:
         model = Course
         fields = [
@@ -133,7 +135,7 @@ class CourseSerializer(serializers.ModelSerializer):
             'meta_title',
             'meta_description',
             'images' ,
-            'multiple_title'
+            'multiple_title','multiple_description'
         ]
 
 class SubCategorySerializer(serializers.ModelSerializer):

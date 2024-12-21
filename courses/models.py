@@ -135,7 +135,7 @@ class multiple_title(models.Model):
 class multiple_descriptions(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='multiple_description')
     title =  models.TextField(null=True, blank=True )
-    description = RichTextField()
+    description = RichTextField() 
     
     def __str__(self):
           return self.title

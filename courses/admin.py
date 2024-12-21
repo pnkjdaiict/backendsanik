@@ -5,7 +5,7 @@ from .forms import *
 class DescriptionInline(admin.StackedInline):
     model = multiple_descriptions
  
-    fields = (   'id', 'title','description')  
+    fields = ('id', 'title','description')  
     classes = ('collapse',)   
     extra = 1  
 class TitleInline(admin.StackedInline):

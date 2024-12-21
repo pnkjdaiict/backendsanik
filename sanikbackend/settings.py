@@ -147,7 +147,7 @@ CORS_ALLOWED_ORIGINS = [
         'https://aisseecoaching.com' , 'https://www.royaldefenceacademy.com'   
 ]
 CORS_ALLOW_METHODS = [
-    'GET',
+    'GET',  
     'POST',
     'PUT',
     'PATCH',
