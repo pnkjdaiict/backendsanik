@@ -1,0 +1,5 @@
+.custom-checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Create 3 equal columns */
+    gap: 10px; /* Add spacing between checkboxes */
+}

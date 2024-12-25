@@ -2,9 +2,23 @@ from django.contrib import admin
 from .models import *
 from django.utils.html import format_html
 from .forms import *
+class multiImagesline(admin.StackedInline):
+    model = multiple_Images
+    form = ImageForm
+    fields = ( "title" , 
+    "course"  ,
+    "image"  ,
+    "image_alt" ,
+    "contact_number" ,
+    "meta_title"  ,
+    "meta_description"  ,
+    "meta_keyword" )  # Replace with your model's fields
+    classes = ('collapse',)  # Optional: Makes it collapsible in admin panel
+    extra = 1  # Number of empty image fields to display
+  
 class DescriptionInline(admin.StackedInline):
     model = multiple_descriptions
- 
+    
     fields = ('id', 'title','description')  
     classes = ('collapse',)   
     extra = 1  
@@ -16,10 +30,12 @@ class TitleInline(admin.StackedInline):
     extra = 1  
 class ImageInline(admin.StackedInline):
     model = Image
+    form = ImageForm
     fields = ('image', 'image_alt', 'meta_keyword' , 'contact_number' , 'youtube_link' , 'facebook_link', 'instagram_link' , 'meta_title' , 'meta_description')  # Replace with your model's fields
     classes = ('collapse',)  # Optional: Makes it collapsible in admin panel
-
+    
     extra = 1  # Number of empty image fields to display
+    
 class SubCourseImages(admin.StackedInline):
     model = SubCourseImage
     fields = ('image', 'image_alt', 'meta_keyword' , 'contact_number' , 'youtube_link' , 'facebook_link', 'instagram_link' , 'meta_title' , 'meta_description')  # Replace with your model's fields
@@ -28,29 +44,70 @@ class SubCourseImages(admin.StackedInline):
 
     extra = 1  # Number of empty image fields to display
  
+ 
 class CoursesAdmin(admin.ModelAdmin):
+    # Loading the JavaScript for the "Select All" functionality
     class Media:
-      js = ('js/slugify.js',) 
+        js = ('js/slugify.js','js/select-all.js')  # Path to your JS file (make sure it's inside the static/js folder)
+
+    # Customizing the form for the Course model
     form = CourseForm
-    inlines = [ImageInline ,TitleInline,DescriptionInline ]
+
+    # Inlines used for the Course model
+    inlines = [ImageInline, TitleInline, DescriptionInline, multiImagesline]
+    TabularInline = [multiImagesline, multiImagesline]  # You may want to review this if TabularInline is meant for something specific
+
+    # Automatically populate the slug field from the title
     prepopulated_fields = {'slug_field': ('title',)}
-    
+
+    # Defining the fields to display in the admin form
     fields = (
-          'title', 'short_title','short_description','slug_field' ,'description', 'image', 'image_alt', 'course_code'  , 'states' ,'cities', 'localities' ,'meta_keyword' ,  'meta_title' , 'meta_description',
-            'contact_number',
-            'facebook_link',
-            'instagram_link',
-            'youtube_link',)
-    list_display = ('title', 'slug_field','image_preview', 'short_description','course_code',  'contact_number' ,)  # Add other fields as needed
-    search_fields = ('title', 'course_code',)    
-    readonly_fields = ('image_preview',)  # Make the slug field readonly (optional)
-    
-    
+        'title', 'short_title', 'short_description', 'slug_field', 'description', 'image', 'image_alt', 
+        'course_code', 'states', 'cities', 'localities', 'meta_keyword', 'meta_title', 
+        'meta_description', 'contact_number', 'facebook_link', 'instagram_link', 'youtube_link',
+    )
+
+    # Defining the columns to display in the list view
+    list_display = (
+        'title', 'slug_field', 'image_preview', 'short_description', 'course_code', 'contact_number',
+    )
+
+    # Fields to search in the admin search bar
+    search_fields = ('title', 'course_code',)
+
+    # Fields that are read-only (in this case, the image preview)
+    readonly_fields = ('image_preview',)
+
+    # Adding a preview of the image in the admin list view
     def image_preview(self, obj):
         if obj.image:
-            return format_html('<img src="{}" id="image-preview" style="display:block; width:100px    "/>', obj.image.url)
-        return format_html('<img id="image-preview" style="display:none; width:100px    " />')
+            return format_html('<img src="{}" id="image-preview" style="display:block; width:100px;"/>', obj.image.url)
+        return format_html('<img id="image-preview" style="display:none; width:100px;"/>')
     image_preview.short_description = 'Image Preview'
+
+# Registering the model admin
+admin.site.register(Course, CoursesAdmin)
+
+# class CoursesAdmin(admin.ModelAdmin):
+#     class Media:
+#       js = ('js/slugify.js',) 
+      
+#     form = CourseForm
+#     inlines = [ImageInline ,TitleInline,DescriptionInline  ,multiImagesline]
+#     TabularInline= [multiImagesline ,multiImagesline]
+#     prepopulated_fields = {'slug_field': ('title',)}
+#     fields = (
+#           'title', 'short_title','short_description','slug_field' ,'description', 'image', 'image_alt', 'course_code'  , 'states' ,'cities', 'localities' ,'meta_keyword' ,  'meta_title' , 'meta_description', 'contact_number',  'facebook_link', 'instagram_link',         'youtube_link',)
+#     list_display = ('title', 'slug_field','image_preview', 'short_description','course_code',  'contact_number' ,) 
+#     search_fields = ('title', 'course_code',)    
+#     readonly_fields = ('image_preview',)
+    
+    
+#     def image_preview(self, obj):
+#         if obj.image:
+#             return format_html('<img src="{}" id="image-preview" style="display:block; width:100px    "/>', obj.image.url)
+#         return format_html('<img id="image-preview" style="display:none; width:100px    " />')
+#     image_preview.short_description = 'Image Preview'
 
 class SubCoursesAdmin(admin.ModelAdmin):
     form = SubCourseForm
@@ -93,7 +150,7 @@ class CourseSeoDataAdmin(admin.ModelAdmin):
     og_image_preview.short_description = "OG Image Preview"
 
 admin.site.register(CourseSeoData, CourseSeoDataAdmin)
-admin.site.register(Course ,CoursesAdmin)
+# admin.site.register(Course ,CoursesAdmin)
 admin.site.register(SubCourse ,SubCoursesAdmin)
 admin.site.register(SubCategory ,SubCategoryAdmin)
 

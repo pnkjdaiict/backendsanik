@@ -1,8 +1,10 @@
 from django.contrib import admin
 from .models import Blog
 from django.utils.html import format_html
+from .form import *
 # Create a custom admin class if you need to modify how the model is displayed
 class BlogAdmin(admin.ModelAdmin):
+    form= BlogForm
     list_display = ('title', 'author', 'status', 'created_at', 'updated_at')  # Columns to display in the list view
     search_fields = ('title', 'author')  # Fields to be searchable
     prepopulated_fields = {'slug_field': ('title',)}  # Automatically populate the slug field from the title

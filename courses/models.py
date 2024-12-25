@@ -21,8 +21,8 @@ class Course(models.Model):
     youtube_link=models.CharField(max_length=250 , null=True , blank=True)
     facebook_link = models.CharField(max_length=250 , null=True , blank=True)
     instagram_link = models.CharField(max_length=250 , null=True  ,blank=True)
-    meta_title = models.CharField(max_length =250, null=True ,  blank=True)
-    meta_description = models.CharField(max_length=250 , null=True , blank=True)
+    meta_title = models.CharField(max_length =500, null=True ,  blank=True)
+    meta_description = models.CharField(max_length=500 , null=True , blank=True)
     def save(self, *args, **kwargs):
         if not self.slug_field:  # Generate slug only if it's not already set
             self.slug_field = slugify(self.title)
@@ -30,9 +30,7 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
-
-
-
+    
 class CourseSeoData(models.Model):
     meta_title = models.CharField(max_length=250, null=True, blank=True)
     meta_description = models.CharField(max_length=250, null=True, blank=True)
@@ -50,8 +48,6 @@ class CourseSeoData(models.Model):
     
     def __str__(self):
         return self.meta_title or "SEO Data"
-
-# SubCourses Model
 class SubCourse(models.Model):
     title = models.CharField(max_length=255)
     slug_field =models.SlugField(unique=True, blank=True, null=True ,  )
@@ -77,8 +73,6 @@ class SubCourse(models.Model):
 
     def __str__(self):
         return self.title
-
-
 class Image(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='course_images/')
@@ -89,9 +83,7 @@ class Image(models.Model):
     facebook_link = models.CharField(max_length=250 , null=True , blank=True)
     instagram_link = models.CharField(max_length=250 , null=True  ,blank=True)
     meta_title = models.CharField(max_length =250, null=True ,  blank=True)
-    meta_description = models.CharField(max_length=250 , null=True , blank=True)
- 
-    
+    meta_description = models.CharField(max_length=250 , null=True , blank=True)  
     def __str__(self):
         return f"Image for {self.course.title}"
 class SubCourseImage(models.Model):
@@ -108,7 +100,6 @@ class SubCourseImage(models.Model):
      
     def __str__(self):
         return f"Image for {self.course.title}"
-
 class SubCategory(models.Model):
 
     title = models.CharField(max_length=255)
@@ -127,16 +118,26 @@ class SubCategory(models.Model):
     meta_description = models.CharField(max_length=250, null=True, blank=True)
     
     def __str__(self): 
-        return self.title
-    
+        return self.title  
 class multiple_title(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='multiple_title')
     title = models.TextField(null=True, blank=True )
-    
     def __str__(self):
+          
           return self.title
 class multiple_descriptions(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='multiple_description')
     title =  models.TextField(null=True, blank=True , default="new" )
     description = RichTextField() 
-     
+
+class multiple_Images(models.Model):
+    title = models.CharField(max_length=250 , null= True , blank=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='multiple_images')
+    image = models.ImageField(upload_to='course_images/')
+    image_alt = models.CharField(max_length=500, null=True, blank=True)
+    contact_number = models.CharField(max_length=100 , null=True,  blank=True)
+    meta_title = models.CharField(max_length =500, null=True ,  blank=True)
+    meta_description = models.CharField(max_length=500 , null=True , blank=True)  
+    meta_keyword = models.TextField(null=True, blank=True )    
+    def __str__(self):
+        return f"Image for {self.course.title}"

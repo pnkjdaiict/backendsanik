@@ -5,7 +5,7 @@ class BlogSerializer(serializers.ModelSerializer):
     class Meta :
         model = Blog
         fields = [
-            'id',
+            'id',   
             'title',
             'slug_field',
             'short_description',
@@ -15,9 +15,9 @@ class BlogSerializer(serializers.ModelSerializer):
             'updated_at',
             'status',
             'image',  
-            'meta_title',
+            'meta_title',      
             'meta_description',
-            'meta_keywords',
+            'meta_keywords',   
         ]
 class BlogHomepageSerializer(serializers.ModelSerializer):
     class Meta:

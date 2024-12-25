@@ -7,7 +7,7 @@ class Blog(models.Model):
     
     # Short description of the blog
     short_description = models.CharField(max_length=500)
-    slug_field = models.SlugField(unique=True, blank=True, null=True ,)  # Slug field
+    slug_field = models.SlugField(max_length=500 , unique=True, blank=True, null=True ,)  # Slug field
 
     # Full content of the blog, using a rich text editor
     description = RichTextField()

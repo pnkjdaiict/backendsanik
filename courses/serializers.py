@@ -4,6 +4,21 @@ from states.models import *
 from rest_framework import serializers
 from .models import Image
 from .serializers import *
+class multi_ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = multiple_Images
+        
+    fields = [
+    "title"  ,
+    "course"  ,
+    "image"  ,
+    "image_alt" ,
+    "contact_number" ,
+    "meta_title"  ,
+    "meta_description"  ,
+    "meta_keyword" ,
+
+        ]
 class multi_descriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = multiple_descriptions

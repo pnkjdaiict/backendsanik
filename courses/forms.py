@@ -11,10 +11,92 @@ class multititleForm(forms.ModelForm):
     class Meta:
         model = multiple_title
         fields = '__all__'
+from django import forms
+from .models import Image
+
+class ImageForm(forms.ModelForm):
+    image_alt = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 2,
+            'cols': 100
+        }),
+        required=False
+    )
+    meta_keyword = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 4,
+            'cols': 100
+        }),
+        required=False
+    )
+    contact_number = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 2,
+            'cols': 50
+        }),
+        required=False
+    )
+    youtube_link = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 2,
+            'cols': 100
+        }),
+        required=False
+    )
+    facebook_link = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 2,
+            'cols': 100
+        }),
+        required=False
+    )
+    instagram_link = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 2,
+            'cols': 100
+        }),
+        required=False
+    )
+    meta_title = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 2,
+            'cols': 100
+        }),
+        required=False
+    )
+    meta_description = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 4,
+            'cols': 100
+        }),
+        required=False
+    )
+
+    class Meta:
+        model = Image
+        fields = '__all__'  # Include all fields in the form
 
 class CourseForm(forms.ModelForm):
    
     title = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 4,  # Number of visible rows
+            'cols': 150  # Number of visible columns
+        }),
+     )
+    short_title = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 4,  # Number of visible rows
+            'cols': 150  # Number of visible columns
+        }),
+     )
+    image_alt = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 4,  # Number of visible rows
+            'cols': 150  # Number of visible columns
+        }),
+     )
+    course_code= forms.CharField(
         widget=forms.Textarea(attrs={
             'rows': 4,  # Number of visible rows
             'cols': 150  # Number of visible columns
@@ -70,7 +152,10 @@ class CourseForm(forms.ModelForm):
         queryset=Cities.objects.all(),
         widget=forms.CheckboxSelectMultiple
     )  
-
+    localities = forms.ModelMultipleChoiceField(
+        queryset=Localities.objects.all(),
+        widget=forms.CheckboxSelectMultiple
+    ) 
     class Meta:
         model = Course
         fields = '__all__'
@@ -186,7 +271,7 @@ class SubCourseForm(forms.ModelForm):
 
 class CourseSeoDataForm(forms.ModelForm):
     meta_title = forms.CharField(
-        widget=forms.Textarea(attrs={
+        widget=forms.Textarea( attrs={
             'rows': 4,  # Number of visible rows
             'cols': 150  # Number of visible columns
         }),

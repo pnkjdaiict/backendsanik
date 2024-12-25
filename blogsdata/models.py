@@ -7,7 +7,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=250)
     
     # Slug field that will be auto-generated from the title
-    slug_field = models.SlugField(null=True, blank=True, unique=True)  # Unique constraint added for slug
+    slug_field = models.SlugField(max_length=500 ,null=True, blank=True, unique=True)  # Unique constraint added for slug
     
     # Short description of the blog
     short_description = models.CharField(max_length=500)
