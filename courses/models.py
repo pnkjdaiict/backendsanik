@@ -133,11 +133,11 @@ class multiple_descriptions(models.Model):
 class multiple_Images(models.Model):
     title = models.CharField(max_length=250 , null= True , blank=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='multiple_images')
-    image = models.ImageField(upload_to='course_images/')
+    image = models.ImageField(upload_to='course_images/' )
     image_alt = models.CharField(max_length=500, null=True, blank=True)
     contact_number = models.CharField(max_length=100 , null=True,  blank=True)
     meta_title = models.CharField(max_length =500, null=True ,  blank=True)
     meta_description = models.CharField(max_length=500 , null=True , blank=True)  
     meta_keyword = models.TextField(null=True, blank=True )    
     def __str__(self):
-        return f"Image for {self.course.title}"
+        return f"Image for {self.title}"

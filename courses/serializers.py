@@ -168,7 +168,7 @@ class CourseSerializer(serializers.ModelSerializer):
             'meta_title',
             'meta_description',
             'images' ,
-            'multiple_title','multiple_description'
+            'multiple_title','multiple_description' , 'multiple_Images'
         ]
 
 class SubCategorySerializer(serializers.ModelSerializer):
@@ -178,11 +178,7 @@ class SubCategorySerializer(serializers.ModelSerializer):
                   'price' , 'meta_keyword', 'contact_number', 'facebook_link', 'instagram_link', 
                   'youtube_link', 'meta_title', 'meta_description']
 
-
-
-
 class CityCourseSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Course
         fields = [

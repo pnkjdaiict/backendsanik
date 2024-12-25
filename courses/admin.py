@@ -47,9 +47,7 @@ class SubCourseImages(admin.StackedInline):
  
 class CoursesAdmin(admin.ModelAdmin):
     # Loading the JavaScript for the "Select All" functionality
-    class Media:
-        js = ('js/slugify.js','js/select-all.js')  # Path to your JS file (make sure it's inside the static/js folder)
-
+    
     # Customizing the form for the Course model
     form = CourseForm
 
