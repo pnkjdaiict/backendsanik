@@ -132,7 +132,7 @@ class multiple_descriptions(models.Model):
 
 class multiple_Images(models.Model):
     title = models.CharField(max_length=250 , null= True , blank=True)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='multiple_images')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='multiple_image')
     image = models.ImageField(upload_to='course_images/' )
     image_alt = models.CharField(max_length=500, null=True, blank=True)
     contact_number = models.CharField(max_length=100 , null=True,  blank=True)

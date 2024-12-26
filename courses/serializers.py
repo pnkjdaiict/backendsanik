@@ -17,7 +17,6 @@ class multi_ImageSerializer(serializers.ModelSerializer):
     "meta_title"  ,
     "meta_description"  ,
     "meta_keyword" ,
-
         ]
 class multi_descriptionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -142,7 +141,7 @@ class CourseSerializer(serializers.ModelSerializer):
     images = ImageSerializer(many=True, read_only=True)
     multiple_title = multi_titleSerializer(many=True, read_only=True)
     multiple_description  = multi_descriptionSerializer(many=True, read_only=True)
-
+    multiple_Images = multi_ImageSerializer(many=True, read_only=True)
     class Meta:
         model = Course
         fields = [
@@ -168,7 +167,9 @@ class CourseSerializer(serializers.ModelSerializer):
             'meta_title',
             'meta_description',
             'images' ,
-            'multiple_title','multiple_description' , 'multiple_Images'
+            'multiple_title',
+            'multiple_description' ,
+            'multiple_Images'
         ]
 
 class SubCategorySerializer(serializers.ModelSerializer):

@@ -11,7 +11,6 @@ class BlogAdmin(admin.ModelAdmin):
     list_filter = ('status', 'created_at')  # Add filters for status and date
     ordering = ('-created_at',)  # Default ordering by creation date (descending)
     readonly_fields = ('image_preview',)  # Make the image preview read-only
-
     def image_preview(self, obj):
       
         if obj.image:
