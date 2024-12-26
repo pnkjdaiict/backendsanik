@@ -13,7 +13,7 @@ class Course(models.Model):
     image = models.ImageField(upload_to='covers/', blank=True, null=True)
     image_alt = models.CharField(max_length=250, null=True, blank=True)
     states = models.ManyToManyField(State, related_name='courses')
-    cities = models.ManyToManyField(Cities, related_name='courses')
+    cities = models.ManyToManyField(Cities, related_name='courses' )
     localities = models.ManyToManyField(Localities , related_name='localities')
     course_code = models.CharField(max_length=100, unique=True, null=True, blank=True)
     meta_keyword = models.TextField(null=True, blank=True )
@@ -130,14 +130,13 @@ class multiple_descriptions(models.Model):
     title =  models.TextField(null=True, blank=True , default="new" )
     description = RichTextField() 
 
-class multiple_Images(models.Model):
-    title = models.CharField(max_length=250 , null= True , blank=True)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='multiple_image')
-    image = models.ImageField(upload_to='course_images/' )
+class multiple_images(models.Model):
+    title = models.CharField(max_length=500 , null= True , blank=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='multiple_imagess')
+    imagess = models.ImageField(upload_to='covers/', blank=True, null=True)
     image_alt = models.CharField(max_length=500, null=True, blank=True)
     contact_number = models.CharField(max_length=100 , null=True,  blank=True)
     meta_title = models.CharField(max_length =500, null=True ,  blank=True)
     meta_description = models.CharField(max_length=500 , null=True , blank=True)  
-    meta_keyword = models.TextField(null=True, blank=True )    
-    def __str__(self):
-        return f"Image for {self.title}"
+    meta_keyword = models.TextField(null=True, blank=True )
+     

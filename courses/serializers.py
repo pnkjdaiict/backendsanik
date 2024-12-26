@@ -4,20 +4,11 @@ from states.models import *
 from rest_framework import serializers
 from .models import Image
 from .serializers import *
-class multi_ImageSerializer(serializers.ModelSerializer):
+class MultipleImagesSerializer(serializers.ModelSerializer):
     class Meta:
-        model = multiple_Images
-        
-    fields = [
-    "title"  ,
-    "course"  ,
-    "image"  ,
-    "image_alt" ,
-    "contact_number" ,
-    "meta_title"  ,
-    "meta_description"  ,
-    "meta_keyword" ,
-        ]
+        model = multiple_images
+        fields = ['id', 'title', 'imagess', 'image_alt', 'contact_number', 'meta_title', 'meta_description', 'meta_keyword']
+
 class multi_descriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = multiple_descriptions
@@ -141,7 +132,7 @@ class CourseSerializer(serializers.ModelSerializer):
     images = ImageSerializer(many=True, read_only=True)
     multiple_title = multi_titleSerializer(many=True, read_only=True)
     multiple_description  = multi_descriptionSerializer(many=True, read_only=True)
-    multiple_Images = multi_ImageSerializer(many=True, read_only=True)
+    multiple_imagess = MultipleImagesSerializer(many=True, read_only=True)
     class Meta:
         model = Course
         fields = [
@@ -168,8 +159,9 @@ class CourseSerializer(serializers.ModelSerializer):
             'meta_description',
             'images' ,
             'multiple_title',
+            'multiple_imagess',
             'multiple_description' ,
-            'multiple_Images'
+       
         ]
 
 class SubCategorySerializer(serializers.ModelSerializer):

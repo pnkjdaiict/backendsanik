@@ -2,29 +2,7 @@ from django.contrib import admin
 from .models import *
 from django.utils.html import format_html
 from .forms import *
-class multiImagesline(admin.StackedInline):
-    model = multiple_Images
-    form = ImageForm
-    fields = ( "title" , 
-    "course"  ,
-    "image"  ,
-    "image_alt" ,
-    "contact_number" ,
-    "meta_title"  ,
-    "meta_description"  ,
-    "image_preview" ,
-    "meta_keyword")   # Replace with your model's fields
-    classes = ('collapse',)  # Optional: Makes it collapsible in admin panel
-    extra = 1  # Number of empty image fields to display
-    readonly_fields = ('image_preview',)
 
-    # Adding a preview of the image in the admin list view
-    def image_preview(self, obj):
-        if obj.image:
-            return format_html('<img src="{}" id="image-preview" style="display:block; width:100px;"/>', obj.image.url)
-        return format_html('<img id="image-preview" style="display:none; width:100px;"/>')
-    image_preview.short_description = 'Image Preview' 
-  
 class DescriptionInline(admin.StackedInline):
     model = multiple_descriptions
     
@@ -54,6 +32,31 @@ class SubCourseImages(admin.StackedInline):
     extra = 1  # Number of empty image fields to display
  
  
+
+
+class MultiImagesline(admin.StackedInline):
+    model = multiple_images
+    # form = ImageForm
+    fields = ( "title" , 
+    "course"  ,
+    "imagess"  ,
+    "image_alt" ,
+    "contact_number" ,
+    "meta_title"  ,
+    "meta_description"  ,
+    "image_preview" ,
+    "meta_keyword")   # Replace with your model's fields
+    classes = ('collapse',)  # Optional: Makes it collapsible in admin panel
+    extra = 1  # Number of empty image fields to display
+    readonly_fields = ('image_preview',)
+
+    # Adding a preview of the image in the admin list view
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" id="image-preview" style="display:block; width:100px;"/>', obj.image.url)
+        return format_html('<img id="image-preview" style="display:none; width:100px;"/>')
+    image_preview.short_description = 'Image Preview' 
+  
 class CoursesAdmin(admin.ModelAdmin):
     # Loading the JavaScript for the "Select All" functionality
     
@@ -61,7 +64,7 @@ class CoursesAdmin(admin.ModelAdmin):
     form = CourseForm
 
     # Inlines used for the Course model
-    inlines = [ImageInline, TitleInline, DescriptionInline, multiImagesline]
+    inlines = [ImageInline, TitleInline, DescriptionInline, MultiImagesline]
   # You may want to review this if TabularInline is meant for something specific
 
     # Automatically populate the slug field from the title
