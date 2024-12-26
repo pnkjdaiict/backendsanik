@@ -36,7 +36,7 @@ class SubCourseImages(admin.StackedInline):
 
 class MultiImagesline(admin.StackedInline):
     model = multiple_images
-    # form = ImageForm
+    form = ImageForm
     fields = ( "title" , 
     "course"  ,
     "imagess"  ,
@@ -52,8 +52,8 @@ class MultiImagesline(admin.StackedInline):
 
     # Adding a preview of the image in the admin list view
     def image_preview(self, obj):
-        if obj.image:
-            return format_html('<img src="{}" id="image-preview" style="display:block; width:100px;"/>', obj.image.url)
+        if obj.imagess:
+            return format_html('<img src="{}" id="image-preview" style="display:block; width:100px;"/>', obj.imagess.url)
         return format_html('<img id="image-preview" style="display:none; width:100px;"/>')
     image_preview.short_description = 'Image Preview' 
   

@@ -15,6 +15,13 @@ from django import forms
 from .models import Image
 
 class ImageForm(forms.ModelForm):
+    title  = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 2,
+            'cols': 100
+        }),
+        required=False
+    )
     image_alt = forms.CharField(
         widget=forms.Textarea(attrs={
             'rows': 2,
