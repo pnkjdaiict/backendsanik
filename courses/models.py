@@ -3,8 +3,6 @@ from states.models import *
 # Create your models here.
 from django.utils.text import slugify
 from ckeditor.fields import RichTextField
-import hashlib
-from django.core.exceptions import ValidationError
 
 class Course(models.Model):
     title = models.CharField(max_length=255 , help_text="enter title")
@@ -75,12 +73,7 @@ class SubCourse(models.Model):
 
     def __str__(self):
         return self.title
-def get_image_hash(image_file):
-    """Calculate the hash of the image file."""
-    hasher = hashlib.md5()  # Use SHA256 for more security
-    for chunk in image_file.chunks():
-        hasher.update(chunk)
-    return hasher.hexdigest()
+
 class Image(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='course_images/')
@@ -92,33 +85,8 @@ class Image(models.Model):
     instagram_link = models.CharField(max_length=250 , null=True  ,blank=True)
     meta_title = models.CharField(max_length =250, null=True ,  blank=True)
     meta_description = models.CharField(max_length=250 , null=True , blank=True)  
-    
     def __str__(self):
         return f"Image for {self.course.title}"
-
-    def clean(self):
-        """Ensure no duplicate images are uploaded."""
-        if self.image:
-            image_hash = self.get_image_hash(self.image)
-            
-            # Check for duplicates within the same course
-            for existing_image in Image.objects.filter(course=self.course):
-                if self.get_image_hash(existing_image.image) == image_hash:
-                    raise ValidationError("This image already exists for the selected course.")
-
-    @staticmethod
-    def get_image_hash(image_file):
-        """Calculate the hash of an image file."""
-        hasher = hashlib.md5()  # You can use SHA256 for more security
-        for chunk in image_file.chunks():
-            hasher.update(chunk)
-        return hasher.hexdigest()
-
-    def save(self, *args, **kwargs):
-        # Call clean method to ensure validation before saving
-        self.clean()
-        super().save(*args, **kwargs)
-
 class SubCourseImage(models.Model):
     course = models.ForeignKey(SubCourse, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='Subcourse_images/')
