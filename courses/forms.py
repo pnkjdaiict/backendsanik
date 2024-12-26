@@ -14,7 +14,7 @@ class multititleForm(forms.ModelForm):
 from django import forms
 from .models import Image
 
-class ImageForm(forms.ModelForm):
+class MultiImageForm(forms.ModelForm):
     title  = forms.CharField(
         widget=forms.Textarea(attrs={
             'rows': 2,
@@ -22,6 +22,69 @@ class ImageForm(forms.ModelForm):
         }),
         required=False
     )
+    image_alt = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 2,
+            'cols': 100
+        }),
+        required=False
+    )
+    meta_keyword = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 4,
+            'cols': 100
+        }),
+        required=False
+    )
+    contact_number = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 2,
+            'cols': 50
+        }),
+        required=False
+    )
+    youtube_link = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 2,
+            'cols': 100
+        }),
+        required=False
+    )
+    facebook_link = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 2,
+            'cols': 100
+        }),
+        required=False
+    )
+    instagram_link = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 2,
+            'cols': 100
+        }),
+        required=False
+    )
+    meta_title = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 2,
+            'cols': 100
+        }),
+        required=False
+    )
+    meta_description = forms.CharField(
+        widget=forms.Textarea(attrs={
+            'rows': 4,
+            'cols': 100
+        }),
+        required=False
+    )
+
+    class Meta:
+        model = Image
+        fields = '__all__'  # Include all fields in the form
+
+class ImageForm(forms.ModelForm):
+     
     image_alt = forms.CharField(
         widget=forms.Textarea(attrs={
             'rows': 2,

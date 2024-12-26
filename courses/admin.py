@@ -36,7 +36,7 @@ class SubCourseImages(admin.StackedInline):
 
 class MultiImagesline(admin.StackedInline):
     model = multiple_images
-    form = ImageForm
+    form = MultiImageForm
     fields = ( "title" , 
     "course"  ,
     "imagess"  ,
