@@ -13,7 +13,7 @@ class BannerAdmin(admin.ModelAdmin):
 
     def image_preview(self, obj):
         if obj.Image:
-            return format_html('<img src="{}" id="image-preview"/>', obj.Image.url)
+            return format_html('<img src="{}" id="image-preview"  style="width: 400px; height: auto;"  />', obj.Image.url)
         return format_html('<img id="image-preview" style="display:none;" />')
     image_preview.short_description = 'Image Preview'
 
