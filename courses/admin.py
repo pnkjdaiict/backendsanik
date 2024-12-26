@@ -13,7 +13,7 @@ class multiImagesline(admin.StackedInline):
     "meta_title"  ,
     "meta_description"  ,
     "image_preview" ,
-    "meta_keyword" )  # Replace with your model's fields
+    "meta_keyword")   # Replace with your model's fields
     classes = ('collapse',)  # Optional: Makes it collapsible in admin panel
     extra = 1  # Number of empty image fields to display
     readonly_fields = ('image_preview',)
@@ -23,7 +23,7 @@ class multiImagesline(admin.StackedInline):
         if obj.image:
             return format_html('<img src="{}" id="image-preview" style="display:block; width:100px;"/>', obj.image.url)
         return format_html('<img id="image-preview" style="display:none; width:100px;"/>')
-    image_preview.short_description = 'Image Preview'
+    image_preview.short_description = 'Image Preview' 
   
 class DescriptionInline(admin.StackedInline):
     model = multiple_descriptions
@@ -71,7 +71,7 @@ class CoursesAdmin(admin.ModelAdmin):
     fields = (
         'title', 'short_title', 'short_description', 'slug_field', 'description', 'image', 'image_alt', 
         'course_code', 'states', 'cities', 'localities', 'meta_keyword', 'meta_title', 
-        'meta_description', 'contact_number', 'facebook_link', 'instagram_link', 'youtube_link','multiple_images'
+        'meta_description', 'contact_number', 'facebook_link', 'instagram_link', 'youtube_link',
     )
 
     # Defining the columns to display in the list view
