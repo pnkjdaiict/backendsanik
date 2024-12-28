@@ -162,7 +162,7 @@ CORS_ALLOW_HEADERS = [
     # Add more headers if needed
 ]
 
-
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10000 
 import os
 from dotenv import load_dotenv
 

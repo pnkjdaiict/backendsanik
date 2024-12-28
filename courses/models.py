@@ -73,7 +73,6 @@ class SubCourse(models.Model):
 
     def __str__(self):
         return self.title
-
 class Image(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='images')
     image = models.ImageField(upload_to='course_images/')
