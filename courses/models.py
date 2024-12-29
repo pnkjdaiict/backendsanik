@@ -5,15 +5,13 @@ from django.utils.text import slugify
 from ckeditor.fields import RichTextField
 
 class Course(models.Model):
+    states = models.ManyToManyField(State, related_name='courses')
+    cities = models.ManyToManyField(Cities, related_name='courses' )
     title = models.CharField(max_length=255 , help_text="enter title")
     short_title = models.CharField(max_length=255  , blank=True, null=True ,)
     short_description = models.CharField(max_length=250)
     slug_field = models.SlugField(unique=True, blank=True, null=True ,)  # Slug field
     description = RichTextField()
-    image = models.ImageField(upload_to='covers/', blank=True, null=True)
-    image_alt = models.CharField(max_length=250, null=True, blank=True)
-    states = models.ManyToManyField(State, related_name='courses')
-    cities = models.ManyToManyField(Cities, related_name='courses' )
     localities = models.ManyToManyField(Localities , related_name='localities')
     course_code = models.CharField(max_length=100, unique=True, null=True, blank=True)
     meta_keyword = models.TextField(null=True, blank=True )
@@ -23,6 +21,8 @@ class Course(models.Model):
     instagram_link = models.CharField(max_length=250 , null=True  ,blank=True)
     meta_title = models.CharField(max_length =500, null=True ,  blank=True)
     meta_description = models.CharField(max_length=500 , null=True , blank=True)
+    image = models.ImageField(upload_to='covers/', blank=True, null=True)
+    image_alt = models.CharField(max_length=250, null=True, blank=True)
     def save(self, *args, **kwargs):
         if not self.slug_field:  # Generate slug only if it's not already set
             self.slug_field = slugify(self.title)

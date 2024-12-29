@@ -124,15 +124,15 @@ class CourseSeoDataSerializer(serializers.ModelSerializer):
 # Serializer for Course Model
 
 class CourseSerializer(serializers.ModelSerializer):
+    multiple_title = multi_titleSerializer(many=True, read_only=True)
+    multiple_description  = multi_descriptionSerializer(many=True, read_only=True)
+    multiple_imagess = MultipleImagesSerializer(many=True, read_only=True)
     states = StateSerializer(many=True, read_only=True)
     cities = CitySerializer(many=True, read_only=True)
     localities = LocalitiesSerializer(many=True, read_only=True)
     sub_courses = SubCourseSerializer(many=True, read_only=True)
     coursesn = SubCourseSerializer(many=True, read_only=True)  # Use the related_name defined in the Course model
     images = ImageSerializer(many=True, read_only=True)
-    multiple_title = multi_titleSerializer(many=True, read_only=True)
-    multiple_description  = multi_descriptionSerializer(many=True, read_only=True)
-    multiple_imagess = MultipleImagesSerializer(many=True, read_only=True)
     class Meta:
         model = Course
         fields = [
