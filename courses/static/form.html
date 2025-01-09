@@ -1,0 +1,23 @@
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div class="form-group">
+        <label for="states">States</label>
+        <input type="text" class="searchable-field" placeholder="Search states..." />
+        {{ form.states }}
+    </div>
+    
+    <div class="form-group">
+        <label for="cities">Cities</label>
+        <input type="text" class="searchable-field" placeholder="Search cities..." />
+        {{ form.cities }}
+    </div>
+
+    <div class="form-group">
+        <label for="localities">Localities</label>
+        <input type="text" class="searchable-field" placeholder="Search localities..." />
+        {{ form.localities }}
+    </div>
+    
+    <button type="submit">Submit</button>
+</form>

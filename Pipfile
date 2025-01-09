@@ -15,6 +15,8 @@ boto3 = "*"
 psycopg2-binary = "*"
 python-dotenv = "*"
 django-autocomplete-light = "*"
+django-select2 = "*"
+geopy = "*"
 
 [dev-packages]
 

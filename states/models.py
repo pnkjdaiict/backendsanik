@@ -16,7 +16,10 @@ class State(models.Model):
     instagram_link = models.CharField(max_length=250 , null=True  ,blank=True,  default="https://www.instagram.com/onlinesainikschoolcoaching/")
     meta_title = models.CharField(max_length =250, null=True ,  blank=True , )
     meta_description = models.CharField(max_length=250 , null=True , blank=True )
-
+    latitude   = models.CharField(max_length=250, null=True, blank=True)
+    logitude  = models.CharField(max_length=250, null=True, blank=True)
+    pincode = models.CharField(max_length=250, null=True, blank=True)
+    
     def __str__(self) :
       return self.title
     
@@ -35,6 +38,9 @@ class Cities(models.Model):
     youtube_link = models.CharField(max_length=500, null=True, blank=True , default="https://www.youtube.com/@rdajaipur")
     meta_title = models.CharField(max_length=250, null=True, blank=True , default="Top Coaching for Sainik School, RMS, and RIMC Entrance Exams in Banswara")
     meta_description = models.CharField(max_length=250, null=True, blank=True , default="sainik school coaching, rashtriya military school coaching, rms entrance exam coaching, rimc coaching, military school entrance exam coaching, sainik school entrance exam coaching, rashtriya military school entrance exam, rimc entrance exam coaching")
+    latitude   = models.CharField(max_length=250, null=True, blank=True)
+    logitude  = models.CharField(max_length=250, null=True, blank=True)
+    pincode = models.CharField(max_length=250, null=True, blank=True)
     
     def __str__(self):
         return self.title
@@ -54,6 +60,8 @@ class Localities(models.Model):
     youtube_link = models.CharField(max_length=500, null=True, blank=True , default="https://www.youtube.com/@rdajaipur")
     meta_title = models.CharField(max_length=250, null=True, blank=True)
     meta_description = models.CharField(max_length=250, null=True, blank=True)
+    latitude   = models.CharField(max_length=250, null=True, blank=True)
+    logitude  = models.CharField(max_length=250, null=True, blank=True)
 
     def __str__(self):
         return self.title

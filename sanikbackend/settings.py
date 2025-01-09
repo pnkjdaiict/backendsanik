@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'django_filters',
+    'django_select2' ,
+    'geopy',
     'corsheaders',
     'storages',
     'ckeditor',

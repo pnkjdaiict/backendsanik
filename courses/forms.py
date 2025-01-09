@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from django_select2.forms import Select2MultipleWidget
 class multititleForm(forms.ModelForm):
    
     title = forms.CharField(
@@ -145,6 +146,7 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = '__all__'  # Include all fields in the form
+    
 
 class CourseForm(forms.ModelForm):
    
@@ -214,21 +216,40 @@ class CourseForm(forms.ModelForm):
             'cols': 150  # Number of visible columns
         }),
      )     
+    # states = forms.ModelMultipleChoiceField(
+    #     queryset=State.objects.all(),
+    #     widget=forms.CheckboxSelectMultiple
+    # )
     states = forms.ModelMultipleChoiceField(
         queryset=State.objects.all(),
-        widget=forms.CheckboxSelectMultiple
+        # widget=  forms.CheckboxSelectMultiple
+        widget=Select2MultipleWidget(attrs={'style': 'width: 800px; height: 800px;'})
     )
+    
+    
     cities = forms.ModelMultipleChoiceField(
         queryset=Cities.objects.all(),
-        widget=forms.CheckboxSelectMultiple
+        widget=Select2MultipleWidget(attrs={'style': 'width: 800px; height: 800px;'})
+
+        # widget=forms.CheckboxSelectMultiple
     )  
     localities = forms.ModelMultipleChoiceField(
         queryset=Localities.objects.all(),
-        widget=forms.CheckboxSelectMultiple
+        widget=Select2MultipleWidget(attrs={'style': 'width: 800px; height: 800px;'})
+        
+        # widget=forms.CheckboxSelectMultiple
     ) 
     class Meta:
         model = Course
         fields = '__all__'
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Preselect all states, cities, and localities for new instances
+        if not self.instance.pk:  # Only for new instances
+            self.fields['states'].initial = State.objects.all()
+            self.fields['cities'].initial = Cities.objects.all()
+            self.fields['localities'].initial = Localities.objects.all()
+     
 
 class SubCategoriesForm(forms.ModelForm):
     subcourse = forms.ModelMultipleChoiceField(
