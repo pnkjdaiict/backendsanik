@@ -19,5 +19,6 @@ class BlogAdmin(admin.ModelAdmin):
 
     image_preview.short_description = "Image Preview"  # Column name in the admin interface
 
+
 # Register the Blog model with the custom admin configuration
 admin.site.register(Blog, BlogAdmin)

@@ -9,11 +9,13 @@ class State(models.Model):
     Image = models.ImageField(upload_to='covers/', blank=True, null=True)
     image_alt = models.CharField(max_length=250 ,  null=True , blank=True)
     meta_keyword = models.TextField(null=True, blank=True )
-    contact_number = models.CharField(max_length=100 , null=True,  blank=True)
-    facebook_link = models.CharField(max_length=250 , null=True , blank=True)
-    instagram_link = models.CharField(max_length=250 , null=True  ,blank=True)
-    meta_title = models.CharField(max_length =250, null=True ,  blank=True)
-    meta_description = models.CharField(max_length=250 , null=True , blank=True)
+    contact_number = models.CharField(max_length=100 , null=True,  blank=True , default="8619453001")
+    Whatsapp_number = models.CharField(max_length=100 , null=True,  blank=True ,default="8278640248")
+    facebook_link = models.CharField(max_length=250 , null=True , blank=True , default="https://www.facebook.com/Sainikschoolentranceexamcoaching/" )
+    youtube_link = models.CharField(max_length=250 , null=True , blank=True , default="https://www.youtube.com/@rdajaipur")
+    instagram_link = models.CharField(max_length=250 , null=True  ,blank=True,  default="https://www.instagram.com/onlinesainikschoolcoaching/")
+    meta_title = models.CharField(max_length =250, null=True ,  blank=True , )
+    meta_description = models.CharField(max_length=250 , null=True , blank=True )
 
     def __str__(self) :
       return self.title
@@ -27,6 +29,7 @@ class Cities(models.Model):
     image_alt = models.CharField(max_length=250, null=True, blank=True , default="Sainik School, RMS, and RIMC Entrance Exams in Banswara")
     meta_keyword = models.TextField(null=True, blank=True ,default="sainik school coaching, rashtriya military school coaching, rms entrance exam coaching, rimc coaching, military school entrance exam coaching, sainik school entrance exam coaching, rashtriya military school entrance exam, rimc entrance exam coaching, military school coaching in Banswara, rms coaching in Banswara, sainik school coaching in Banswara, rimc coaching in Banswara, military entrance exam preparation Banswara")
     contact_number = models.CharField(max_length=100, null=True, blank=True , default="8769422006")
+    whatsapp_number = models.CharField(max_length=100 , null=True,  blank=True ,default="8278640248")
     facebook_link = models.CharField(max_length=250, null=True, blank=True , default="https://www.facebook.com/Sainikschoolentranceexamcoaching/")
     instagram_link = models.CharField(max_length=250, null=True, blank=True , default="https://www.instagram.com/onlinesainikschoolcoaching/")
     youtube_link = models.CharField(max_length=500, null=True, blank=True , default="https://www.youtube.com/@rdajaipur")
@@ -44,10 +47,11 @@ class Localities(models.Model):
     Image = models.ImageField(upload_to='covers/', blank=True, null=True)
     image_alt = models.CharField(max_length=250, null=True, blank=True)
     meta_keyword = models.TextField(null=True, blank=True)
-    contact_number = models.CharField(max_length=100, null=True, blank=True)
-    facebook_link = models.CharField(max_length=250, null=True, blank=True)
-
-    instagram_link = models.CharField(max_length=250, null=True, blank=True)
+    contact_number = models.CharField(max_length=100, null=True, blank=True , default="8769422006")
+    whatsapp_number = models.CharField(max_length=100 , null=True,  blank=True ,default="8278640248")
+    facebook_link = models.CharField(max_length=250, null=True, blank=True , default="https://www.facebook.com/Sainikschoolentranceexamcoaching/")
+    instagram_link = models.CharField(max_length=250, null=True, blank=True , default="https://www.instagram.com/onlinesainikschoolcoaching/")
+    youtube_link = models.CharField(max_length=500, null=True, blank=True , default="https://www.youtube.com/@rdajaipur")
     meta_title = models.CharField(max_length=250, null=True, blank=True)
     meta_description = models.CharField(max_length=250, null=True, blank=True)
 

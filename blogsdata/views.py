@@ -12,4 +12,10 @@ class BlogsDataViewSet(viewsets.ModelViewSet):
     http_method_names = ['get', 'post', 'delete','patch']
     filter_backends = [DjangoFilterBackend]  # Enable filtering
     filterset_class = BlogFilter  # Specify the filter class
+
+class BlogSlugViewSet(viewsets.ModelViewSet):
+    queryset = Blog.objects.all()
+    serializer_class= BlogSlugSerializer
+    http_method_names = ['get', 'post', 'delete','patch']
+    
    

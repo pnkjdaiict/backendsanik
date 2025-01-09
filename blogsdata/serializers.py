@@ -23,3 +23,8 @@ class BlogHomepageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
         fields = ['title', 'short_description', 'image', 'author',]
+
+class BlogSlugSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Blog
+        fields = ['title' , 'slug_field' ]
