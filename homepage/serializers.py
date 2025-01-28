@@ -1,6 +1,8 @@
-from rest_framework import serializers
+from rest_framework import serializers, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from .models import *
-
+from rest_framework.views import APIView
 class SEOSerializer(serializers.ModelSerializer):
     class Meta:
         model = SEO
@@ -111,4 +113,15 @@ class EnquieryFormSerializer(serializers.ModelSerializer):
             'message', 
             'cities' ,
             'states'   ,        
+        ]
+class FAQSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = FAQ
+        fields = ['id', 'question', 'answer']
+
+class HomepageContentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HomepageContent
+        fields = [ 
+            'details', 
         ]

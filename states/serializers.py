@@ -7,7 +7,6 @@ class StateLimitedSerializer(serializers.ModelSerializer):
             'title',
             'short_description',
             'contact_number',
-            'facebook_link',
             'instagram_link',
             'Image',
             'image_alt',

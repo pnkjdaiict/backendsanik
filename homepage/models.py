@@ -1,8 +1,8 @@
 from django.db import models
 from courses.models import *
 # Create your models here.
-from django.db import models
-
+from django.db import models 
+from ckeditor.fields import RichTextField
 class SEO(models.Model):
    
     title = models.CharField(max_length=255, help_text="The title of the page for SEO.")
@@ -37,7 +37,18 @@ class SEO(models.Model):
     def get_keywords(self): 
         return self.keywords.split(',') if self.keywords else []
 
+class FAQ(models.Model):
+    question = models.CharField()
+    answer = models.TextField()
+     
+    def __str__(self):
+        return self.question
 
+class HomepageContent(models.Model):
+    details = RichTextField()
+    def __str__(self):
+        return self.details
+      
 class Banner(models.Model):
       Image = models.ImageField(upload_to='covers/', blank=True, null=True)
       description = models.CharField(max_length=250 , null=True , blank=True)
@@ -58,8 +69,8 @@ class Banner(models.Model):
 class TopScroller(models.Model):
    Image = models.ImageField(upload_to='covers/', blank=True , null=True)
    image_alt = models.CharField(max_length=255 )
-   description = models.CharField(max_length=250 , null=True , blank=True)
-   title = models.CharField(max_length=250 , null=True ) 
+   description = models.CharField(  null=True , blank=True)
+   title = models.CharField( null=True ) 
    def __str__(self):
       return self.title
    
@@ -89,4 +100,6 @@ class EnquiryForm(models.Model):
    message = models.CharField(max_length=250)
    states = models.CharField(max_length=200, blank=True)
    cities = models.CharField(max_length=200, blank=True)
-  
+
+
+

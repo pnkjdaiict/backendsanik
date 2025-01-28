@@ -23,10 +23,11 @@ class Course(models.Model):
     meta_description = models.CharField(max_length=500 , null=True , blank=True)
     image = models.ImageField(upload_to='covers/', blank=True, null=True)
     image_alt = models.CharField(max_length=250, null=True, blank=True)
+    
     def save(self, *args, **kwargs):
-        if not self.slug_field:  # Generate slug only if it's not already set
-            self.slug_field = slugify(self.title)
-        super().save(*args, **kwargs)  # Call the parent class save method
+        if not self.slug_field:   
+            self.slug_field = slugify(self.title)   
+        super().save(*args, **kwargs)   
 
     def __str__(self):
         return self.title

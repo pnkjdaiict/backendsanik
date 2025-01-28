@@ -18,7 +18,8 @@ class BannerAdmin(admin.ModelAdmin):
     image_preview.short_description = 'Image Preview'
 
 admin.site.register(Banner, BannerAdmin)
-
+admin.site.register(FAQ)
+admin.site.register(HomepageContent)
 
 class TopScrollerAdmin(admin.ModelAdmin):
     list_display = ('title', 'image_preview','image_alt', 'description')  # Fields to display in the list view

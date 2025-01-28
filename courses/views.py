@@ -88,13 +88,16 @@ class CitiesWithCoursesView(ModelViewSet):
         queryset = Cities.objects.all()
         serializer_class = CityWithCoursesSerializer 
         http_method_names = ['get', 'post', 'patch', 'delete']  # Allow GET, POST, PATCH, DELETE (optional)
+        
+class StatesWithCoursesView(ModelViewSet):
+        queryset = State.objects.all()
+        serializer_class = StateWithCoursesSerializer 
+        http_method_names = ['get', 'post', 'patch', 'delete']  # Allow GET, POST, PATCH, DELETE (optional)
 class CourseListView(ModelViewSet):
         queryset = SubCategory.objects.all()
         serializer_class = SubCategorySerializer 
         http_method_names = ['get', 'post', 'patch', 'delete']  # Allow GET, POST, PATCH, DELETE (optional)
 class CourseSeoDataViewSet(ModelViewSet):
-
-
     queryset = CourseSeoData.objects.all()
     serializer_class = CourseSeoDataSerializer
     http_method_names = ['get', 'post', 'patch', 'delete'] 

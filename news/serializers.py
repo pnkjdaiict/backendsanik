@@ -22,3 +22,7 @@ class NewsHomepageSerializer(serializers.ModelSerializer):
     class Meta:
         model = News
         fields = ['title', 'short_description', 'image', 'author',]
+class NewsSlugSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = News
+        fields = ['title', 'short_description', 'image', 'author',]

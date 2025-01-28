@@ -1,3 +1,6 @@
+
+
+
 from rest_framework import serializers
 from .models import *
 from states.models import *
@@ -184,13 +187,38 @@ class CityCourseSerializer(serializers.ModelSerializer):
             'description',
            
         ]
+class StateCourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = [
+            'id',
+            'title',
+            'slug_field',
+            'short_title',
+            'short_description',
+            'description',
+            'contact_number',
+            'youtube_link',
+            'facebook_link',
+            'instagram_link' ,
+      ]
+    def validate_slug_field(self, value):
+        if not value.islower():
+            raise serializers.ValidationError("Slug field must be in lowercase.")
+        return value
+
 
 class CityWithCoursesSerializer(serializers.ModelSerializer):
     # Include the related courses for each city
     courses = CityCourseSerializer(many=True, read_only=True)
-
     class Meta:
         model = Cities
         fields = ['id', 'title', 'courses']   
+
+class StateWithCoursesSerializer(serializers.ModelSerializer): 
+    courses = StateCourseSerializer(many=True, read_only=True)
+    class Meta:
+        model = State
+        fields = ['id', 'title', 'courses' , 'Image' ,'contact_number','image_alt','instagram_link','short_description','title']   
 
         

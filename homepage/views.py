@@ -34,3 +34,12 @@ class EnquieryFormViewSet(ModelViewSet):
     serializer_class= EnquieryFormSerializer
     http_method_names = ['get', 'post', 'delete','patch']
 
+class FAQListView(ModelViewSet):
+    queryset = FAQ.objects.all()
+    serializer_class= FAQSerializer
+    http_method_names = ['get', 'post', 'delete','patch']
+class HomepageContentView(ModelViewSet):
+    queryset = HomepageContent.objects.all()
+    serializer_class= HomepageContentSerializer
+    http_method_names = ['get', 'post', 'delete','patch']
+   
