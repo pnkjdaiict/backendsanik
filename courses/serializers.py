@@ -130,7 +130,27 @@ class CourseSerializer(serializers.ModelSerializer):
     multiple_title = multi_titleSerializer(many=True, read_only=True)
     multiple_description  = multi_descriptionSerializer(many=True, read_only=True)
     multiple_imagess = MultipleImagesSerializer(many=True, read_only=True)
+    # states = StateSerializer(many=True,)
     states = StateSerializer(many=True, read_only=True)
+    state_ids = serializers.PrimaryKeyRelatedField(
+        queryset=State.objects.all(),
+        source='states',  # Maps to the `states` field in the Course model
+        many=True,
+        write_only=True  # Only for updates, not included in GET responses
+    )
+    city_ids = serializers.PrimaryKeyRelatedField(
+        queryset=Cities.objects.all(),
+        source='cities',  # Maps to the `cities` field in the Course model
+        many=True,
+        write_only=True  # Only for updates, not included in GET responses
+    )
+    locality_ids = serializers.PrimaryKeyRelatedField(
+        queryset=Localities.objects.all(),
+        source='localities',  # Maps to the `localities` field in the Course model
+        many=True,
+        write_only=True  # Only for updates, not included in GET responses
+    )
+
     cities = CitySerializer(many=True, read_only=True)
     localities = LocalitiesSerializer(many=True, read_only=True)
     sub_courses = SubCourseSerializer(many=True, read_only=True)
@@ -147,7 +167,10 @@ class CourseSerializer(serializers.ModelSerializer):
             'description',
             'image', 
             'image_alt', 
-            'states', 
+            'states',    
+            'state_ids',
+            'city_ids' ,  
+            'locality_ids',  
             'cities',
             'localities', 
             'sub_courses',
@@ -166,7 +189,7 @@ class CourseSerializer(serializers.ModelSerializer):
             'multiple_description' ,
        
         ]
-
+    
 class SubCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = SubCategory
@@ -221,4 +244,14 @@ class StateWithCoursesSerializer(serializers.ModelSerializer):
         model = State
         fields = ['id', 'title', 'courses' , 'Image' ,'contact_number','image_alt','instagram_link','short_description','title']   
 
-        
+class CourseslugSerializer(serializers.ModelSerializer):
+      class Meta:
+        model = Course
+        fields = [ 
+            'id',
+            'title' ,
+            'short_title',
+            'slug_field',
+            'states' 
+            ]
+          

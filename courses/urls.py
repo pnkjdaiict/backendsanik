@@ -8,7 +8,7 @@ router.register(r'sub-courses', SubCourseListAPIView, basename='subcourse')
 router.register(r'courses-seo-data', CourseSeoDataViewSet, basename='seocoursedata')
 router.register('cities-with-courses', CitiesWithCoursesView, basename='cities-with-courses'),
 router.register(r'states-with-courses', StatesWithCoursesView, basename='states-with-courses'),
-
+router.register(r'courses-slug' ,CourseslugAPIView , basename ='courses-slug')
 urlpatterns = [
     path('', include(router.urls)),
 ]

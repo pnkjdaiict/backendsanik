@@ -5,9 +5,9 @@ from django.utils.text import slugify
 from ckeditor.fields import RichTextField
 
 class Course(models.Model):
-    states = models.ManyToManyField(State, related_name='courses')
+    states = models.ManyToManyField(State, related_name='courses' )
     cities = models.ManyToManyField(Cities, related_name='courses' )
-    title = models.CharField(max_length=255 , help_text="enter title")
+    title = models.CharField(max_length=255 , help_text="enter title" )
     short_title = models.CharField(max_length=255  , blank=True, null=True ,)
     short_description = models.CharField(max_length=250)
     slug_field = models.SlugField(unique=True, blank=True, null=True ,)  # Slug field
@@ -31,6 +31,7 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+    
     
 class CourseSeoData(models.Model):
     meta_title = models.CharField(max_length=250, null=True, blank=True)

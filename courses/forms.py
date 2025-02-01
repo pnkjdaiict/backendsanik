@@ -225,6 +225,11 @@ class CourseForm(forms.ModelForm):
         # widget=  forms.CheckboxSelectMultiple
         widget=Select2MultipleWidget(attrs={'style': 'width: 800px; height: 800px;'})
     )
+    states = forms.ModelMultipleChoiceField(
+    queryset=State.objects.all(),
+    widget=Select2MultipleWidget(attrs={'style': 'width: 800px; height: 800px;'}),
+    required=False,
+)
     
     
     cities = forms.ModelMultipleChoiceField(
@@ -233,10 +238,16 @@ class CourseForm(forms.ModelForm):
 
         # widget=forms.CheckboxSelectMultiple
     )  
+    cities = forms.ModelMultipleChoiceField(
+        queryset=Cities.objects.all(),
+        widget=Select2MultipleWidget(attrs={'style': 'width: 800px; height: 800px;'}),
+        required=False,
+        # widget=forms.CheckboxSelectMultiple
+    )  
     localities = forms.ModelMultipleChoiceField(
         queryset=Localities.objects.all(),
-        widget=Select2MultipleWidget(attrs={'style': 'width: 800px; height: 800px;'})
-        
+        widget=Select2MultipleWidget(attrs={'style': 'width: 800px; height: 800px;'}),
+        required=False,
         # widget=forms.CheckboxSelectMultiple
     ) 
     class Meta:

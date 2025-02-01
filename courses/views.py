@@ -12,6 +12,13 @@ from django_filters.rest_framework import DjangoFilterBackend
 # views.py
 from django.http import JsonResponse
 from .models import *
+from rest_framework.pagination import PageNumberPagination
+
+class CitiesPagination(PageNumberPagination):
+    page_size = 20  # Default page size (can be overridden by query params)
+    page_size_query_param = 'limit'  # Allows you to pass 'limit' as query param to adjust page size
+    max_page_size = 100  # Max limit for page size
+
 
 def get_cities(request):
     state_id = request.GET.get('state_id')
@@ -41,10 +48,9 @@ class SubCategoryListView(ModelViewSet):
         
 class CourseListAPIView(ModelViewSet):
     queryset = Course.objects.prefetch_related('coursesn').all()  # Prefetch related sub-courses
- 
     # queryset = Course.objects.all()
     serializer_class = CourseSerializer
-    http_method_names = ['get', 'post', 'patch', 'delete']  # Restrict allowed methods
+    # http_method_names = ['get', 'post', 'patch', 'delete']  # Restrict allowed methods
     filter_backends = [DjangoFilterBackend]  # Enable filtering
     filterset_class = CourseFilter  # Specify the filter class
     
@@ -54,14 +60,23 @@ class CourseListAPIView(ModelViewSet):
             serializer.save(slug_field=slugify(serializer.validated_data['title']))
         else:
             serializer.save()
+        def perform_create(self, serializer):
+         if not serializer.validated_data.get('slug'):
+            serializer.save(slug_field=slugify(serializer.validated_data['title']))
+         else:
+            serializer.save()
 
     def perform_update(self, serializer):
-         
-        if not serializer.validated_data.get('slug'):
-            serializer.save(slug_field=slugify(serializer.validated_data['title']))
-        else:
-            serializer.save()
-# View to get all sub-courses for a given course
+        # Save the course instance
+        course = serializer.save()
+        course.save()  # Save again to ensure changes are persisted
+
+
+class CourseslugAPIView(ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = CourseslugSerializer 
+    http_method_names = ['get', 'post', 'patch', 'delete']  # Allow GET, POST, PATCH, DELETE (optional)
+        
 class SubCourseListAPIView(ModelViewSet):
         
         queryset = SubCourse.objects.all()
@@ -69,7 +84,6 @@ class SubCourseListAPIView(ModelViewSet):
         http_method_names = ['get', 'post', 'patch', 'delete']  # Allow GET, POST, PATCH, DELETE (optional)
         filter_backends = [DjangoFilterBackend]  # Enable filtering
         filterset_class = SubcourseFilter  # Specify the filter class
-    
         def perform_create(self, serializer):
        
          if not serializer.validated_data.get('slug'):
@@ -88,6 +102,7 @@ class CitiesWithCoursesView(ModelViewSet):
         queryset = Cities.objects.all()
         serializer_class = CityWithCoursesSerializer 
         http_method_names = ['get', 'post', 'patch', 'delete']  # Allow GET, POST, PATCH, DELETE (optional)
+        pagination_class = CitiesPagination 
         
 class StatesWithCoursesView(ModelViewSet):
         queryset = State.objects.all()

@@ -5,7 +5,7 @@ from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 # Create your views here.
 class BlogPagination(PageNumberPagination):
-    page_size = 5  # Default number of items per page
+    page_size = 10  # Default number of items per page
     page_size_query_param = 'limit'  # Allow clients to set custom limit
     max_page_size = 100  # Upper limit for page size
 
