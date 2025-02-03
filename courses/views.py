@@ -104,7 +104,7 @@ class CitiesWithCoursesView(ModelViewSet):
         queryset = Cities.objects.all()
         serializer_class = CityWithCoursesSerializer 
         http_method_names = ['get', 'post', 'patch', 'delete']  # Allow GET, POST, PATCH, DELETE (optional)
-        # pagination_class = CitiesPagination 
+        pagination_class = CitiesPagination  
         
 class StatesWithCoursesView(ModelViewSet):
         queryset = State.objects.all()
