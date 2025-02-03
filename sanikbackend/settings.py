@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-jy18ky$u$n+z6wj)_zt8+__^6p5j(t$@5yj#xj45j%yzvrjb!)
 DEBUG = True
 
 # ALLOWED_HOSTS = ['localhost' ]
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '13.50.91.174' ,'0.0.0.0','13.61.64.189','*']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '13.50.91.174' ,'0.0.0.0','13.61.64.189' ,'3.110.136.55','*']
 
 
 # Application definition
@@ -140,6 +140,7 @@ USE_I18N = True
 
 USE_TZ = True
  
+DATA_UPLOAD_MAX_MEMORY_SIZE = 2000 * 1024 * 1024  # 50 MB
 
 STATIC_URL = 'static/' 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -147,7 +148,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000','http://13.50.91.174' , 'http://127.0.0.1:5500' , 'https://www.aisseecoaching.com' ,
-        'https://aisseecoaching.com' , 'https://www.royaldefenceacademy.com'   
+        'https://aisseecoaching.com' , 'https://www.royaldefenceacademy.com'    , 'http://3.110.136.55:8000/'
 ]
 CORS_ALLOW_METHODS = [
     'GET',  
