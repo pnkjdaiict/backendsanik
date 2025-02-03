@@ -46,6 +46,7 @@ class SubCategoryListView(ModelViewSet):
         
         http_method_names = ['get', 'post', 'patch', 'delete']  # Allow GET, POST, PATCH, DELETE (optional)
         
+      
 class CourseListAPIView(ModelViewSet):
     queryset = Course.objects.prefetch_related('coursesn').all()  # Prefetch related sub-courses
     # queryset = Course.objects.all()
@@ -70,6 +71,7 @@ class CourseListAPIView(ModelViewSet):
         # Save the course instance
         course = serializer.save()
         course.save()  # Save again to ensure changes are persisted
+
 
 
 class CourseslugAPIView(ModelViewSet):
@@ -102,7 +104,7 @@ class CitiesWithCoursesView(ModelViewSet):
         queryset = Cities.objects.all()
         serializer_class = CityWithCoursesSerializer 
         http_method_names = ['get', 'post', 'patch', 'delete']  # Allow GET, POST, PATCH, DELETE (optional)
-        pagination_class = CitiesPagination 
+        # pagination_class = CitiesPagination 
         
 class StatesWithCoursesView(ModelViewSet):
         queryset = State.objects.all()

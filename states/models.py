@@ -77,6 +77,23 @@ class Localities(models.Model):
     latitude   = models.CharField( null=True, blank=True)
     logitude  = models.CharField( null=True, blank=True)
     pincode = models.CharField( null=True, blank=True)
+    def save(self, *args, **kwargs):
+        # Only replace if `title` exists and is not None
+        if self.title:
+            self.description = self.description.replace("location", self.title)
+            self.short_description = self.short_description.replace("location", self.title)
+            self.meta_keyword = self.meta_keyword.replace("location", self.title)
+            self.meta_title = self.meta_title.replace("location", self.title)
+            self.meta_description = self.meta_description.replace("location", self.title)
+
+        # Debug print statements
+        print(f"Saving locality: {self.title}")
+        print(f"Description: {self.description}")
+        
+        # Save the instance
+        super().save(*args, **kwargs)
+    def __str__(self):
+        return self.title
     def __str__(self):
         return self.title
    

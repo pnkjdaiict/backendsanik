@@ -21,7 +21,7 @@ class CitiesAPIView(ModelViewSet):
     serializer_class = CitiesFullSerializer
     filter_backends = [DjangoFilterBackend]  # Enable filtering
     filterset_class = CityFilter  # Specify the filter class
-    pagination_class = CitiesPagination 
+    # pagination_class = CitiesPagination 
 class CitiesAllAPIView(ModelViewSet):
     queryset = Cities.objects.all()
     serializer_class = CitiesFullSerializer

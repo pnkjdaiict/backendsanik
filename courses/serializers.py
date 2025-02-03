@@ -130,7 +130,6 @@ class CourseSerializer(serializers.ModelSerializer):
     multiple_title = multi_titleSerializer(many=True, read_only=True)
     multiple_description  = multi_descriptionSerializer(many=True, read_only=True)
     multiple_imagess = MultipleImagesSerializer(many=True, read_only=True)
-    # states = StateSerializer(many=True,)
     states = StateSerializer(many=True, read_only=True)
     state_ids = serializers.PrimaryKeyRelatedField(
         queryset=State.objects.all(),
@@ -150,7 +149,6 @@ class CourseSerializer(serializers.ModelSerializer):
         many=True,
         write_only=True  # Only for updates, not included in GET responses
     )
-
     cities = CitySerializer(many=True, read_only=True)
     localities = LocalitiesSerializer(many=True, read_only=True)
     sub_courses = SubCourseSerializer(many=True, read_only=True)
@@ -203,6 +201,7 @@ class CityCourseSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'title',
+            'image',
             'slug_field',
             'short_title',
             'short_description',
@@ -236,7 +235,8 @@ class CityWithCoursesSerializer(serializers.ModelSerializer):
     courses = CityCourseSerializer(many=True, read_only=True)
     class Meta:
         model = Cities
-        fields = ['id', 'title', 'courses']   
+        fields = ['id', 'title', 'courses' ,
+            ]   
 
 class StateWithCoursesSerializer(serializers.ModelSerializer): 
     courses = StateCourseSerializer(many=True, read_only=True)
@@ -252,6 +252,6 @@ class CourseslugSerializer(serializers.ModelSerializer):
             'title' ,
             'short_title',
             'slug_field',
-            'states' 
+            'states'  , "cities" , "localities"
             ]
           
