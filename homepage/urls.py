@@ -10,7 +10,7 @@ router.register('homepageimages',HomePageImagesViewSet)
 router.register(r'topscrollers', HomepageTopScrollViewSet)
 router.register(r'banners', HomepageViewSet)  # Register the ViewSet with the router
 router.register('seo', SEOViewSet)
-router.register(r'faqs', FAQListView)
+router.register(r'faqs', FAQViewSet)
 router.register(r'homepagecontent', HomepageContentView)
 
 

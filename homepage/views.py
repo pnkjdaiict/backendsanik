@@ -2,7 +2,8 @@
 from rest_framework.viewsets import ModelViewSet
 from .models import Banner
 from .serializers import * 
-
+from .filters import * 
+from django_filters.rest_framework import DjangoFilterBackend
 class SEOViewSet(ModelViewSet):
     
     queryset = SEO.objects.all()
@@ -34,9 +35,11 @@ class EnquieryFormViewSet(ModelViewSet):
     serializer_class= EnquieryFormSerializer
     http_method_names = ['get', 'post', 'delete','patch']
 
-class FAQListView(ModelViewSet):
+class FAQViewSet(ModelViewSet):
     queryset = FAQ.objects.all()
-    serializer_class= FAQSerializer
+    serializer_class = FAQSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = FAQFilter
     http_method_names = ['get', 'post', 'delete','patch']
 class HomepageContentView(ModelViewSet):
     queryset = HomepageContent.objects.all()

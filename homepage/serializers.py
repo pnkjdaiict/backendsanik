@@ -117,7 +117,7 @@ class EnquieryFormSerializer(serializers.ModelSerializer):
 class FAQSerializer(serializers.ModelSerializer):
     class Meta:
         model = FAQ
-        fields = ['id', 'question', 'answer']
+        fields = ['id',  'course' ,'question', 'answer']
 
 class HomepageContentSerializer(serializers.ModelSerializer):
     class Meta:

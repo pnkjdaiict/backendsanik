@@ -38,9 +38,9 @@ class SEO(models.Model):
         return self.keywords.split(',') if self.keywords else []
 
 class FAQ(models.Model):
-    question = models.CharField()
-    answer = models.TextField()
-     
+    course =   models.ForeignKey(Course, on_delete=models.CASCADE , null= True , blank=True, related_name='faqs' ,help_text="Leave blank for homepage" )
+    question = RichTextField()
+    answer =   RichTextField()
     def __str__(self):
         return self.question
 
