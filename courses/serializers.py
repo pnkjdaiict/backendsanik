@@ -199,14 +199,14 @@ class CityCourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = [
-            'id',
-            'title',
-            'image',
+            # 'id',
+            # 'title',
+            # 'image',
             'slug_field',
             'short_title',
-            'short_description',
-            'slug_field',
-            'description',
+            # 'short_description',
+            # 'slug_field',
+            # 'description',
            
         ]
 class StateCourseSerializer(serializers.ModelSerializer):
@@ -235,8 +235,7 @@ class CityWithCoursesSerializer(serializers.ModelSerializer):
     courses = CityCourseSerializer(many=True, read_only=True)
     class Meta:
         model = Cities
-        fields = ['id', 'title', 'courses' ,
-            ]   
+        fields = ['id', 'title', 'courses' ]   
 
 class StateWithCoursesSerializer(serializers.ModelSerializer): 
     courses = StateCourseSerializer(many=True, read_only=True)

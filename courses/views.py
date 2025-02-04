@@ -10,6 +10,7 @@ from .filter import *
 from django_filters.rest_framework import DjangoFilterBackend
 # View to get all courses
 # views.py
+from django.db.models import Prefetch
 from django.http import JsonResponse
 from .models import *
 from rest_framework.pagination import PageNumberPagination
@@ -101,11 +102,16 @@ class SubCourseListAPIView(ModelViewSet):
             serializer.save()
 
 class CitiesWithCoursesView(ModelViewSet):
-        queryset = Cities.objects.all()
-        serializer_class = CityWithCoursesSerializer 
-        http_method_names = ['get', 'post', 'patch', 'delete']  # Allow GET, POST, PATCH, DELETE (optional)
-        # pagination_class = CitiesPagination  
-        
+    serializer_class = CityWithCoursesSerializer
+    http_method_names = ['get', 'post', 'patch', 'delete']  # Optional: limit allowed HTTP methods
+
+    def get_queryset(self):
+     return Cities.objects.prefetch_related(
+        Prefetch(
+            'courses',
+            queryset=Course.objects.only('slug_field', 'short_title')  # Fetch only required fields
+        )
+    ).all()
 class StatesWithCoursesView(ModelViewSet):
         queryset = State.objects.all()
         serializer_class = StateWithCoursesSerializer 
