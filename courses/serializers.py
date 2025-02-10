@@ -170,7 +170,6 @@ class HomeCourseSerializer(serializers.ModelSerializer):
             'slug_field',
             # 'coursesn' ,
             'multiple_imagess',
-       
         ]
     
 class CourseSerializer(serializers.ModelSerializer):
@@ -180,21 +179,21 @@ class CourseSerializer(serializers.ModelSerializer):
     states = StateSerializer(many=True, read_only=True)
     state_ids = serializers.PrimaryKeyRelatedField(
         queryset=State.objects.all(),
-        source='states',  # Maps to the `states` field in the Course model
+        source='states',   
         many=True,
-        write_only=True  # Only for updates, not included in GET responses
+        write_only=True  
     )
     city_ids = serializers.PrimaryKeyRelatedField(
         queryset=Cities.objects.all(),
         source='cities',  # Maps to the `cities` field in the Course model
         many=True,
-        write_only=True  # Only for updates, not included in GET responses
+        write_only=True  
     )
     locality_ids = serializers.PrimaryKeyRelatedField(
         queryset=Localities.objects.all(),
-        source='localities',  # Maps to the `localities` field in the Course model
+        source='localities',   
         many=True,
-        write_only=True  # Only for updates, not included in GET responses
+        write_only=True   
     )
     cities = serializers.SerializerMethodField()
     localities = LocalitiesSerializer(many=True, read_only=True)
