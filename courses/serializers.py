@@ -171,7 +171,71 @@ class HomeCourseSerializer(serializers.ModelSerializer):
             # 'coursesn' ,
             'multiple_imagess',
         ]
+
     
+class SingleCourseSerializer(serializers.ModelSerializer):
+    multiple_title = multi_titleSerializer(many=True, read_only=True)
+    multiple_description  = multi_descriptionSerializer(many=True, read_only=True)
+    multiple_imagess = MultipleImagesSerializer(many=True, read_only=True)
+    states = StateSerializer(many=True, read_only=True)
+    state_ids = serializers.PrimaryKeyRelatedField(
+        queryset=State.objects.all(),
+        source='states',   
+        many=True,
+        write_only=True  
+    )
+    city_ids = serializers.PrimaryKeyRelatedField(
+        queryset=Cities.objects.all(),
+        source='cities',  # Maps to the `cities` field in the Course model
+        many=True,
+        write_only=True  
+    )
+    locality_ids = serializers.PrimaryKeyRelatedField(
+        queryset=Localities.objects.all(),
+        source='localities',   
+        many=True,
+        write_only=True   
+    )
+    cities = CitySerializer(many=True, read_only=True)
+    localities = LocalitiesSerializer(many=True, read_only=True)
+    sub_courses = SubCourseSerializer(many=True, read_only=True)
+    coursesn = SubCourseSerializer(many=True, read_only=True)  # Use the related_name defined in the Course model
+    images = ImageSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model = Course
+        fields = [
+            'id',
+            'title',
+            'short_title',
+            'short_description',
+            'slug_field',
+            'description',
+            'image', 
+            'image_alt', 
+            'states',    
+            'state_ids',
+            'city_ids' ,  
+            'locality_ids',  
+            'cities',
+            'localities', 
+            'sub_courses',
+            'coursesn',
+            'course_code', 
+            'meta_keyword',
+            'contact_number',
+            'youtube_link',
+            'facebook_link',
+            'instagram_link',
+            'meta_title',
+            'meta_description',
+            'images' ,
+            'multiple_title',
+            'multiple_imagess',
+            'multiple_description' ,
+        ]
+   
+
 class CourseSerializer(serializers.ModelSerializer):
     multiple_title = multi_titleSerializer(many=True, read_only=True)
     multiple_description  = multi_descriptionSerializer(many=True, read_only=True)
@@ -246,6 +310,8 @@ class CourseSerializer(serializers.ModelSerializer):
         """
         localities = obj.localities.all()[:10]  # Limits to 10 localities
         return LocalitiesSerializer(localities, many=True).data
+
+
 class SubCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = SubCategory

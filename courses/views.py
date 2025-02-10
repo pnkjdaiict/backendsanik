@@ -54,6 +54,32 @@ class HomepageCourseListAPIView(ModelViewSet):
     # http_method_names = ['get', 'post', 'patch', 'delete']  # Restrict allowed methods
    
     
+class SingleCourseListAPIView(ModelViewSet):
+    queryset = Course.objects.prefetch_related('coursesn', ).all()  # Prefetch related sub-courses
+    # queryset = Course.objects.all()
+    serializer_class = SingleCourseSerializer
+    # http_method_names = ['get', 'post', 'patch', 'delete']  # Restrict allowed methods
+    filter_backends = [DjangoFilterBackend]  # Enable filtering
+    filterset_class = CourseFilter  # Specify the filter class
+    
+    def perform_create(self, serializer):
+       
+        if not serializer.validated_data.get('slug'):
+            serializer.save(slug_field=slugify(serializer.validated_data['title']))
+        else:
+            serializer.save()
+        def perform_create(self, serializer):
+         if not serializer.validated_data.get('slug'):
+            serializer.save(slug_field=slugify(serializer.validated_data['title']))
+         else:
+            serializer.save()
+
+    def perform_update(self, serializer):
+        # Save the course instance
+        course = serializer.save()
+        course.save()  # Save again to ensure changes are persisted
+
+
 class CourseListAPIView(ModelViewSet):
     queryset = Course.objects.prefetch_related('coursesn', 'cities').all()  # Prefetch related sub-courses
     # queryset = Course.objects.all()

@@ -4,6 +4,9 @@ from .views import *
 router = DefaultRouter()
 router.register(r'sub-categories', SubCategoryListView, basename='sub-categoreis')
 router.register(r'courses', CourseListAPIView, basename='course') 
+router.register(r'single-courses', SingleCourseListAPIView, basename='singlecourse') 
+
+
 router.register(r'homepage-courses', HomepageCourseListAPIView, basename='homepagecourse')
 
 router.register(r'sub-courses', SubCourseListAPIView, basename='subcourse')
