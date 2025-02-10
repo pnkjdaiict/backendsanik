@@ -3,10 +3,10 @@
 
 from rest_framework import serializers
 from .models import *
-from states.models import *
-from rest_framework import serializers
+from states.models import * 
 from .models import Image
 from .serializers import *
+from rest_framework.pagination import PageNumberPagination
 class MultipleImagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = multiple_images
@@ -54,11 +54,17 @@ class StateSerializer(serializers.ModelSerializer):
         fields = '__all__'  # Include all fields or specify specific fields
 
  
+class CitiesPagination(PageNumberPagination):
+    page_size = 20  # Default page size (can be overridden by query params)
+    page_size_query_param = 'limit'  # Allows you to pass 'limit' as query param to adjust page size
+    max_page_size = 100  # Max limit for page size
+
+
 # CitySerializer with state_object
 class CitySerializer(serializers.ModelSerializer):
     # state_object = StateSerializer()
     # state_title = serializers.CharField(source='state.title', read_only=True)
-
+    paginationclass = CitiesPagination
     class Meta:
         model = Cities
         fields = [
@@ -190,11 +196,12 @@ class CourseSerializer(serializers.ModelSerializer):
         many=True,
         write_only=True  # Only for updates, not included in GET responses
     )
-    cities = CitySerializer(many=True, read_only=True)
+    cities = serializers.SerializerMethodField()
     localities = LocalitiesSerializer(many=True, read_only=True)
     sub_courses = SubCourseSerializer(many=True, read_only=True)
     coursesn = SubCourseSerializer(many=True, read_only=True)  # Use the related_name defined in the Course model
     images = ImageSerializer(many=True, read_only=True)
+    
     class Meta:
         model = Course
         fields = [
@@ -228,7 +235,12 @@ class CourseSerializer(serializers.ModelSerializer):
             'multiple_description' ,
        
         ]
-    
+    def get_cities(self, obj):
+        """
+        Returns only the first 20 cities.
+        """
+        cities = obj.cities.all()[:20]  # Limits to 10 cities
+        return CitySerializer(cities, many=True).data
 class SubCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = SubCategory
@@ -274,7 +286,7 @@ class StateCourseSerializer(serializers.ModelSerializer):
 class CityWithCoursesSerializer(serializers.ModelSerializer):
     # Include the related courses for each city
     courses = CityCourseSerializer(many=True, read_only=True)
-    
+
     class Meta:
         model = Cities
         fields = ['id', 'title', 'courses' ]   
