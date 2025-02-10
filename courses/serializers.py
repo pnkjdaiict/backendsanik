@@ -196,7 +196,7 @@ class CourseSerializer(serializers.ModelSerializer):
         write_only=True   
     )
     cities = serializers.SerializerMethodField()
-    localities = LocalitiesSerializer(many=True, read_only=True)
+    localities = serializers.SerializerMethodField()
     sub_courses = SubCourseSerializer(many=True, read_only=True)
     coursesn = SubCourseSerializer(many=True, read_only=True)  # Use the related_name defined in the Course model
     images = ImageSerializer(many=True, read_only=True)
@@ -240,6 +240,12 @@ class CourseSerializer(serializers.ModelSerializer):
         """
         cities = obj.cities.all()[:20]  # Limits to 10 cities
         return CitySerializer(cities, many=True).data
+    def get_localities(self, obj):
+        """
+        Returns only the first 20 cities.
+        """
+        localities = obj.localities.all()[:10]  # Limits to 10 localities
+        return LocalitiesSerializer(localities, many=True).data
 class SubCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = SubCategory
