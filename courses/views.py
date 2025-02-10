@@ -47,7 +47,13 @@ class SubCategoryListView(ModelViewSet):
         
         http_method_names = ['get', 'post', 'patch', 'delete']  # Allow GET, POST, PATCH, DELETE (optional)
         
-      
+class HomepageCourseListAPIView(ModelViewSet):
+    queryset = Course.objects.prefetch_related('coursesn').all()  # Prefetch related sub-courses
+    # queryset = Course.objects.all()
+    serializer_class = HomeCourseSerializer
+    # http_method_names = ['get', 'post', 'patch', 'delete']  # Restrict allowed methods
+   
+    
 class CourseListAPIView(ModelViewSet):
     queryset = Course.objects.prefetch_related('coursesn').all()  # Prefetch related sub-courses
     # queryset = Course.objects.all()
@@ -104,6 +110,7 @@ class SubCourseListAPIView(ModelViewSet):
 class CitiesWithCoursesView(ModelViewSet):
     serializer_class = CityWithCoursesSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']  # Optional: limit allowed HTTP methods
+    pagination_class =CitiesPagination
 
     def get_queryset(self):
      return Cities.objects.prefetch_related(
@@ -112,6 +119,7 @@ class CitiesWithCoursesView(ModelViewSet):
             queryset=Course.objects.only('slug_field', 'short_title')  # Fetch only required fields
         )
     ).all()
+    
 class StatesWithCoursesView(ModelViewSet):
         queryset = State.objects.all()
         serializer_class = StateWithCoursesSerializer 

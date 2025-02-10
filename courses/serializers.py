@@ -53,10 +53,36 @@ class StateSerializer(serializers.ModelSerializer):
         model = State
         fields = '__all__'  # Include all fields or specify specific fields
 
+ 
+# CitySerializer with state_object
 class CitySerializer(serializers.ModelSerializer):
+    # state_object = StateSerializer()
+    # state_title = serializers.CharField(source='state.title', read_only=True)
+
     class Meta:
         model = Cities
-        fields = '__all__'  # Include all fields or specify specific fields
+        fields = [
+            'Image',
+            'contact_number',
+            'description',
+            'facebook_link',
+            'id',
+            'image_alt',
+            'instagram_link',
+            'latitude',
+            'logitude',
+            'meta_description',
+            'meta_keyword',
+            'meta_title',
+            'pincode',
+            'short_description',
+            'state',
+            # 'state_title',
+            'title',
+            'whatsapp_number',
+            'youtube_link',
+            # 'state_object',  # Includes state details
+        ]  # Include all fields or specify specific fields
 class LocalitiesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Localities
@@ -126,6 +152,21 @@ class CourseSeoDataSerializer(serializers.ModelSerializer):
         ]
 # Serializer for Course Model
 
+class HomeCourseSerializer(serializers.ModelSerializer):
+    # coursesn = SubCourseSerializer(many=True, read_only=True)  # Use the related_name defined in the Course model
+    multiple_imagess = MultipleImagesSerializer(many=True, read_only=True)
+    class Meta:
+        model = Course
+        fields = [
+            'id',
+            'title',             
+            'short_description',
+            'slug_field',
+            # 'coursesn' ,
+            'multiple_imagess',
+       
+        ]
+    
 class CourseSerializer(serializers.ModelSerializer):
     multiple_title = multi_titleSerializer(many=True, read_only=True)
     multiple_description  = multi_descriptionSerializer(many=True, read_only=True)
@@ -233,6 +274,7 @@ class StateCourseSerializer(serializers.ModelSerializer):
 class CityWithCoursesSerializer(serializers.ModelSerializer):
     # Include the related courses for each city
     courses = CityCourseSerializer(many=True, read_only=True)
+    
     class Meta:
         model = Cities
         fields = ['id', 'title', 'courses' ]   
