@@ -105,7 +105,7 @@ DATABASES = {
         'PASSWORD': 'admin#12345',                    # Password
         'HOST': 'rdadb.c9gi6kkea1nx.ap-south-1.rds.amazonaws.com',  # RDS endpoint
         'PORT': '5432',         
-        'CONN_MAX_AGE': 600,               # PostgreSQL default port
+                   # PostgreSQL default port
     }
 }
  
