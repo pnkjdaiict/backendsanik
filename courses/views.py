@@ -136,7 +136,7 @@ class SubCourseListAPIView(ModelViewSet):
 class CitiesWithCoursesView(ModelViewSet):
     serializer_class = CityWithCoursesSerializer
     http_method_names = ['get', 'post', 'patch', 'delete']  # Optional: limit allowed HTTP methods
-    pagination_class =CitiesPagination
+    # pagination_class =CitiesPagination
 
     def get_queryset(self):
      return Cities.objects.prefetch_related(
