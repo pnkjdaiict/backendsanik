@@ -1,6 +1,7 @@
 from django.db import models
 from courses.models import *
 # Create your models here.
+from django.utils.timezone import now
 from django.db import models 
 from ckeditor.fields import RichTextField
 class SEO(models.Model):
@@ -93,13 +94,17 @@ class LineScrollBar(models.Model):
       return self.title
    
 class EnquiryForm(models.Model):
-   type =  models.ManyToManyField(Course, related_name='courses', blank=True)
-   name = models.CharField(max_length=200)
-   email = models.CharField(max_length=200)
-   phone = models.CharField(max_length=50)
-   message = models.CharField(max_length=250)
-   states = models.CharField(max_length=200, blank=True)
-   cities = models.CharField(max_length=200, blank=True)
+    type = models.ManyToManyField(Course, related_name='courses', blank=True)
+    name = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    phone = models.CharField(max_length=50)
+    message = models.CharField(max_length=250)
+    states = models.CharField(max_length=200, blank=True)
+    cities = models.CharField(max_length=200, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)  # Automatically set for new records
+
+    def __str__(self):
+        return f"{self.name} - {self.email}"
 
 
 

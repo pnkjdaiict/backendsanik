@@ -45,4 +45,4 @@ class HomepageContentView(ModelViewSet):
     queryset = HomepageContent.objects.all()
     serializer_class= HomepageContentSerializer
     http_method_names = ['get', 'post', 'delete','patch']
-   
+

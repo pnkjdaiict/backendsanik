@@ -112,7 +112,8 @@ class EnquieryFormSerializer(serializers.ModelSerializer):
             'email',
             'message', 
             'cities' ,
-            'states'   ,        
+            'states',
+            'created_at'        
         ]
 class FAQSerializer(serializers.ModelSerializer):
     class Meta:

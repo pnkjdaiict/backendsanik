@@ -237,9 +237,9 @@ class SingleCourseSerializer(serializers.ModelSerializer):
    
 
 class CourseSerializer(serializers.ModelSerializer):
-    multiple_title = multi_titleSerializer(many=True, read_only=True)
-    multiple_description  = multi_descriptionSerializer(many=True, read_only=True)
-    multiple_imagess = MultipleImagesSerializer(many=True, read_only=True)
+    # multiple_title = multi_titleSerializer(many=True, read_only=True)
+    # multiple_description  = multi_descriptionSerializer(many=True, read_only=True)
+    # multiple_imagess = MultipleImagesSerializer(many=True, read_only=True)
     states = StateSerializer(many=True, read_only=True)
     state_ids = serializers.PrimaryKeyRelatedField(
         queryset=State.objects.all(),
@@ -293,9 +293,9 @@ class CourseSerializer(serializers.ModelSerializer):
             'meta_title',
             'meta_description',
             'images' ,
-            'multiple_title',
-            'multiple_imagess',
-            'multiple_description' ,
+            # 'multiple_title',
+            # 'multiple_imagess',
+            # 'multiple_description' ,
        
         ]
     def get_cities(self, obj):

@@ -7,7 +7,7 @@ class BannerAdmin(admin.ModelAdmin):
         'title', 'contact_number', 'facebook_link', 'instagram_link', 'Image',
         'image_preview', 'description', 'meta_title', 'meta_description', 'image_alt', 'meta_keyword'
     )
-    list_display = ('title', 'image_preview', 'contact_number')  # Add other fields as needed
+    list_display = ('title', 'image_preview', 'contact_number' ,)  # Add other fields as needed
    
     readonly_fields = ('image_preview',)
 
@@ -46,8 +46,8 @@ class HomepageImagesAdmin(admin.ModelAdmin):
 
 class EnquiryFormAdmin(admin.ModelAdmin):
     form = EnqForm
-    list_display = ('name', 'email' , 'phone' ,'message', )
-    search_fields =('name' , 'email' , 'phone' ,  )
+    list_display = ('name', 'email' , 'phone' ,'message','states' ,'created_at')
+    search_fields =('name' , 'email' , 'phone' , 'states' )
 
 
 admin.site.register(HomePageImages ,HomepageImagesAdmin) 
