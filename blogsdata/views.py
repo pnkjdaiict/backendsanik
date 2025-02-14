@@ -7,8 +7,15 @@ from rest_framework.pagination import PageNumberPagination
 from .filter import * 
 from django_filters.rest_framework import DjangoFilterBackend
 class BlogsDataViewSet(viewsets.ModelViewSet):
-    queryset = Blog.objects.all()
-    serializer_class= BlogHomepageSerializer
+    queryset = Blog.objects.all()[:8]  
+    serializer_class= BlogDataSerializer
+    http_method_names = ['get', 'post', 'delete','patch']
+    filter_backends = [DjangoFilterBackend]  # Enable filtering
+    filterset_class = BlogFilter  # Specify the filter class
+
+class BlogsAllViewSet(viewsets.ModelViewSet):
+    queryset = Blog.objects.all() 
+    serializer_class= BlogDataSerializer
     http_method_names = ['get', 'post', 'delete','patch']
     filter_backends = [DjangoFilterBackend]  # Enable filtering
     filterset_class = BlogFilter  # Specify the filter class

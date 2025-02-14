@@ -171,6 +171,25 @@ class HomeCourseSerializer(serializers.ModelSerializer):
             # 'coursesn' ,
             'multiple_imagess',
         ]
+class HomeFeatureCourseSerializer(serializers.ModelSerializer):
+    # coursesn = SubCourseSerializer(many=True, read_only=True)  # Use the related_name defined in the Course model
+    # multiple_imagess = MultipleImagesSerializer(many=True, read_only=True)
+    images = ImageSerializer(many=True, read_only=True)
+    class Meta:
+        model = Course
+        fields = [
+            'id',
+            'title',   
+            'slug_field',          
+            'short_description',
+            'images'
+        ]
+    def to_representation(self, instance):
+        """Limit the number of images to 12."""
+        representation = super().to_representation(instance)
+        representation['images'] = representation['images'][:12]  # Limit images to 12
+        return representation
+
 
     
 class SingleCourseSerializer(serializers.ModelSerializer):
@@ -341,12 +360,9 @@ class StateCourseSerializer(serializers.ModelSerializer):
             'title',
             'slug_field',
             'short_title',
-            'short_description',
-            'description',
-            'contact_number',
-            'youtube_link',
-            'facebook_link',
-            'instagram_link' ,
+           
+            
+            
       ]
     def validate_slug_field(self, value):
         if not value.islower():
@@ -377,5 +393,16 @@ class CourseslugSerializer(serializers.ModelSerializer):
             'short_title',
             'slug_field',
             'states'  , "cities" , "localities"
+            ]
+        
+class CourseHeaderSerializer(serializers.ModelSerializer):
+      class Meta:
+        model = Course
+        fields = [ 
+            'id',
+            'title' ,
+          'short_title',
+            'slug_field',
+             
             ]
           

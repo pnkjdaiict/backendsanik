@@ -53,6 +53,13 @@ class HomepageCourseListAPIView(ModelViewSet):
     serializer_class = HomeCourseSerializer
     # http_method_names = ['get', 'post', 'patch', 'delete']  # Restrict allowed methods
    
+class HomepageFeatureCourseListAPIView(ModelViewSet):
+    queryset = Course.objects.prefetch_related('coursesn').all()  # Prefetch related sub-courses
+    # queryset = Course.objects.all()
+    serializer_class = HomeFeatureCourseSerializer
+    # http_method_names = ['get', 'post', 'patch', 'delete']  # Restrict allowed methods
+   
+
     
 class SingleCourseListAPIView(ModelViewSet):
     queryset = Course.objects.prefetch_related('coursesn', ).all()  # Prefetch related sub-courses
@@ -111,7 +118,12 @@ class CourseslugAPIView(ModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseslugSerializer 
     http_method_names = ['get', 'post', 'patch', 'delete']  # Allow GET, POST, PATCH, DELETE (optional)
-        
+
+class CourseHeaderslugAPIView(ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = CourseHeaderSerializer 
+    http_method_names = ['get', 'post', 'patch', 'delete']  # Allow GET, POST, PATCH, DELETE (optional)
+         
 class SubCourseListAPIView(ModelViewSet):
         
         queryset = SubCourse.objects.all()
